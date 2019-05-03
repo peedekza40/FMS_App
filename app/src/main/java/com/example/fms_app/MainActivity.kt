@@ -12,7 +12,10 @@ import android.support.design.widget.NavigationView
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
+import android.widget.Toast
 
+
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
 
@@ -51,8 +54,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
+        menuInflater.inflate(R.menu.add_btn, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        return when (item!!.itemId) {
+            R.id.add_ac_btn -> {
+                //Toast.makeText(this, "Success!!", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, Add_accounting::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 
@@ -61,14 +77,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_base_data -> {
-
+                val manager = supportFragmentManager
+                val transaction = manager.beginTransaction()
+                val newFragment = Manage_base_data()
+                transaction.replace(R.id.container, newFragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
             }
             R.id.nav_accounting -> {
-                val intent = Intent(this, Main2Activity::class.java)
-                startActivity(intent)
+                val manager = supportFragmentManager
+                val transaction = manager.beginTransaction()
+                val newFragment = Manage_ac()
+                transaction.replace(R.id.container, newFragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
             }
             R.id.nav_report -> {
-
+                val manager = supportFragmentManager
+                val transaction = manager.beginTransaction()
+                val newFragment = Report()
+                transaction.replace(R.id.container, newFragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
             }
             R.id.nav_dashboard -> {
 
@@ -80,3 +110,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 }
+
+

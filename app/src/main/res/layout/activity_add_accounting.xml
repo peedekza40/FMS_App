@@ -5,13 +5,6 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/app_bar_main"
-        tools:context=".MainActivity">
-
-    <RelativeLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            tools:ignore="MissingConstraints" android:id="@+id/container"/>
+        tools:context=".Add_accounting">
 
 </android.support.constraint.ConstraintLayout>
