@@ -23,10 +23,4 @@
 
     <include layout="@layout/content_main"/>
 
-    <ImageButton
-            android:layout_width="43dp"
-            android:layout_height="39dp" app:srcCompat="@drawable/ic_add_black_24dp"
-            android:id="@+id/add_ac_btn" android:background="@drawable/ic_add_black_24dp"
-            app:layout_anchorGravity="end|center" app:layout_anchor="@+id/appBarLayout"/>
-
 </android.support.design.widget.CoordinatorLayout>

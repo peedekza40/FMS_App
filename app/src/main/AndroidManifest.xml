@@ -9,9 +9,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".Main2Activity">
+        </activity>
         <activity
                 android:name=".MainActivity"
-                android:label="FMS"
+                android:label="Financial Management System"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
