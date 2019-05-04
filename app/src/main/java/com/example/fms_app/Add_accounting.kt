@@ -19,7 +19,7 @@ class Add_accounting : AppCompatActivity() {
         actionbar!!.title = "เพิ่มรายการบัญชี"
         //set back button
         actionbar.setDisplayHomeAsUpEnabled(true)
-
+        //sadasdasdda
     }
 
 
