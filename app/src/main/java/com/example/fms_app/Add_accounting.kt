@@ -1,5 +1,6 @@
 package com.example.fms_app
 
+import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -26,7 +27,7 @@ class Add_accounting : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             android.R.id.home -> {
-                NavUtils.navigateUpFromSameTask(this)
+                finish()
                 return true
             }
             else -> return super.onOptionsItemSelected(item)

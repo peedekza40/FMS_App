@@ -18,7 +18,6 @@ import android.widget.Toast
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -68,6 +67,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == RESULT_OK) {
+            when (requestCode){
+                1 ->{
+                    Toast.makeText(this, "Success!!" + requestCode, Toast.LENGTH_SHORT).show()
+                }
+                2 ->{
+                    Toast.makeText(this, "Success!!" + requestCode, Toast.LENGTH_SHORT).show()
+                }
+                3 ->{
+                    Toast.makeText(this, "Success!!" + requestCode, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
