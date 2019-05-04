@@ -6,9 +6,24 @@
              tools:context=".Manage_base_data">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.design.widget.TabLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="จัดการข้อมูลพื้นฐาน" android:textSize="24sp"/>
+            android:layout_height="wrap_content">
+
+        <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="จัดการข้อมูลธนาคาร" android:id="@+id/tab_bank"/>
+
+        <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="จัดการข้อมูลคำอธิบายรายการ" android:id="@+id/tab_desc"/>
+
+        <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="จัดการข้อมูลบัญชีธนาคาร" android:id="@+id/tab_bac"/>
+    </android.support.design.widget.TabLayout>
 
 </FrameLayout>
