@@ -12,7 +12,6 @@ class Add_accounting : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_accounting)
-
         //actionbar
         val actionbar = supportActionBar
         //set actionbar title
