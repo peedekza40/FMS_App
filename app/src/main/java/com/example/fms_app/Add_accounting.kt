@@ -26,7 +26,7 @@ class Add_accounting : AppCompatActivity() {
         //set back button
         actionbar.setDisplayHomeAsUpEnabled(true)
 
-// Instantiate the cache
+        // Instantiate the cache
         val cache = DiskBasedCache(cacheDir, 1024 * 1024) // 1MB cap
         // Set up the network to use HttpURLConnection as the HTTP client.
         val network = BasicNetwork(HurlStack())
