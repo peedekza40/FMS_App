@@ -4,11 +4,28 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".Manage_ac">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="จัดการรายการบัญชี" android:textSize="24sp"/>
-
+            android:orientation="horizontal"
+            android:layout_height="match_parent" android:id="@+id/relative">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp" android:layout_alignParentTop="true" android:layout_marginTop="-2dp"
+                android:id="@+id/linear"
+                android:gravity="center|top">
+            <TextView
+                    android:text="@string/nav_header_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/header" android:textAlignment="center"
+                    tools:text="ตารางลงรายการบัญชีรายรับ - รายจ่าย" android:layout_alignTop="@+id/linear"
+                    android:layout_alignStart="@+id/linear"
+            />
+            <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_alignStart="@+id/linear"
+                    android:layout_alignBottom="@+id/linear"/>
+        </LinearLayout>
+    </RelativeLayout>
 </FrameLayout>
