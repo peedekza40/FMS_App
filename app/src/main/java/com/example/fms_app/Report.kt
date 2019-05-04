@@ -35,6 +35,7 @@ class Report : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+        //code here .....
     }
 
     override fun onCreateView(
