@@ -87,6 +87,9 @@ class add_income : Fragment(){
         val adapter = ArrayAdapter<String>(activity, android.R.layout.simple_dropdown_item_1line, bac_test)
         //adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
         bacText.setAdapter(adapter)
+        bacText.setOnFocusChangeListener { v, hasFocus ->
+            bacText.showDropDown()
+        }
         bacText.setOnClickListener {
             bacText.showDropDown()
         }

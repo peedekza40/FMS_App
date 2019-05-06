@@ -5,6 +5,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
+import android.R
+import android.widget.TextView
+import android.view.LayoutInflater
+import android.view.View
+
 
 class TabAdapter internal constructor(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
     private val mFragmentList = ArrayList<Fragment>()

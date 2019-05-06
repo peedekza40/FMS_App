@@ -59,7 +59,6 @@ class Add_accounting : AppCompatActivity() {
 
         viewPager!!.setAdapter(tapAdapter)
         tabLayout!!.setupWithViewPager(viewPager)
-
     }
 
 
