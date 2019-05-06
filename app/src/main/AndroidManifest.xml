@@ -3,7 +3,10 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.example.fms_app">
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
     <application
+            android:usesCleartextTraffic="true"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="FMS"

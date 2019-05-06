@@ -1,16 +1,23 @@
 package com.example.fms_app
 
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import com.android.volley.RequestQueue
+import com.android.volley.toolbox.BasicNetwork
+import com.android.volley.toolbox.DiskBasedCache
+import com.android.volley.toolbox.HurlStack
+import java.io.Serializable
 
 class ReportPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm){
+
 
     override fun getCount(): Int {
         return 2
     }
 
-    override fun getItem(p0: Int): Fragment {
+    override fun getItem(p0: Int): Fragment? {
 
         when(p0){
             0 -> {
@@ -23,10 +30,10 @@ class ReportPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm){
 
         }
 
-        return Report_income()
+        return null
     }
 
-    override fun getPageTitle(position: Int): CharSequence {
+    override fun getPageTitle(position: Int): CharSequence? {
 
         when(position){
             0->{
@@ -38,7 +45,7 @@ class ReportPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm){
             }
         }
 
-        return "income"
+        return null
     }
 
 }
