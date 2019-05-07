@@ -5,11 +5,10 @@
              android:layout_height="match_parent"
              android:orientation="vertical"
              tools:context=".Report_income">
-    <ScrollView
+    <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <android.support.v7.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:id="@+id/IncomeRecycler"/>
-    </ScrollView>
+            android:layout_height="wrap_content" android:id="@+id/test_incomedata"/>
+    <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/Income_recycler"/>
 </LinearLayout>

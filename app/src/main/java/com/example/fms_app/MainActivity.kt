@@ -13,22 +13,13 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.widget.Toast
-import com.android.volley.Request
-import com.android.volley.RequestQueue
-import com.android.volley.Response
-import com.android.volley.toolbox.BasicNetwork
-import com.android.volley.toolbox.DiskBasedCache
-import com.android.volley.toolbox.HurlStack
-import com.android.volley.toolbox.StringRequest
-import org.json.JSONArray
-import java.io.Serializable
+
 
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private val TAG = "SERVICE_Report"
-    private var requestQueue: RequestQueue?  = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,8 +44,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         navView.setNavigationItemSelectedListener(this)
 
-        this.getIncomeData()
-        this.getPaymentData()
     }
 
     override fun onBackPressed() {
@@ -140,44 +129,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-
-    fun getIncomeData(){
-
-        val url = "http://www.mocky.io/v2/5ccfb106320000630000f77f"
-        val stringRequest = StringRequest( Request.Method.GET, url,
-            Response.Listener<String> { response ->
-                var json = JSONArray(response)
-                var data_report = Report_data("","","","")
-                val data_income = data_report.mapingData(json)
-                Report_income().arguments = Bundle().apply {
-                    putSerializable("income_report_data",data_income as Serializable)
-                }
-
-            },
-            Response.ErrorListener { Toast.makeText(this,"Error",Toast.LENGTH_LONG).show() })
-
-        stringRequest.tag = this.TAG
-        requestQueue?.add(stringRequest)
-
-    }
-
-    fun getPaymentData(){
-
-        val url = "http://www.mocky.io/v2/5ccfeff6320000b52100f90e"
-        val stringRequest = StringRequest( Request.Method.GET, url,
-            Response.Listener<String> { response ->
-                var json = JSONArray(response)
-                var data_report = Report_data("","","","")
-                val data_payment = data_report.mapingData(json)
-                Report_payment().arguments = Bundle().apply {
-                    putSerializable("payment_report_data",data_payment as Serializable)
-                }
-            },
-            Response.ErrorListener { Toast.makeText(this,"Error",Toast.LENGTH_LONG).show() })
-
-        stringRequest.tag = this.TAG
-        this.requestQueue?.add(stringRequest)
-    }
 }
 
 
