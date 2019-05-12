@@ -12,7 +12,7 @@ abstract class Conifg_service(
     val parent_ctx: Context,
     val parent_chDir: File) {
     protected var requestQueue: RequestQueue? = null
-    protected var ip: String = "http://192.168.1.6:80"
+    protected var ip: String = "http://10.80.84.129:80"
     protected var url: String = ip
 
     init {

@@ -1,6 +1,6 @@
 package com.example.fms_app.Data_class
 
-class BankAccount(
+data class BankAccount(
     var bacId: Int,
     var bacName: String
 ){

@@ -13,21 +13,21 @@ import android.widget.DatePicker
 import android.app.DatePickerDialog
 import android.os.Build
 import android.support.annotation.RequiresApi
+import android.text.Editable
 import android.widget.AdapterView
 import android.widget.Toast
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.AdapterView.OnItemClickListener
 import com.example.fms_app.Data_class.BankAccount
-import com.example.fms_app.Service.Bank_account
-import com.example.fms_app.Service.Income
-import com.example.fms_app.Service.TransformDate
-import com.example.fms_app.Service.VolleyCallback
+import com.example.fms_app.Data_class.Desc
+import com.example.fms_app.Service.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.collections.ArrayList
+import android.text.TextWatcher
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -73,45 +73,39 @@ class add_income : Fragment(){
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val service_income = Income(activity!!.applicationContext,activity!!.cacheDir) //service from phpmyadmin
+        //service
+        val service_income = Income(activity!!.applicationContext,activity!!.cacheDir)
         val service_bankACC = Bank_account(activity!!.applicationContext, activity!!.cacheDir)
+        val service_desc = Description(activity!!.applicationContext, activity!!.cacheDir)
+
+
+
         /*----------------------set inc_code------------------------------------*/
         service_income.get_last_inc_code(object : VolleyCallback {
-            override fun onSuccess(result: JSONObject) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
             override fun onSuccess(result: String) {
                 val last_code = JSONArray(result).getJSONObject(0).getString("inc_code")
                 codeText.setText(gen_inc_code(last_code))
             }
         })
-
-        /*---------------------set inc_date-------------------------*/
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-        var inc_date = TransformDate(current.format(formatter)).getThaiDate_1()
-        dateText.setText(inc_date)
-
-        //date picker
-        val c = Calendar.getInstance()
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
-        dateText.setOnClickListener {
-            val dpd = DatePickerDialog(activity, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                // Display Selected date in Toast
-                var dd = dayOfMonth.toString().padStart(2, '0')
-                var mm = (monthOfYear + 1).toString().padStart(2, '0')
-                dateText.setText(TransformDate("$dd-$mm-$year").getThaiDate_1())
-            }, year, month, day)
-            dpd.show()
-        }
+        /*---------------------set datepicker-------------------------*/
+        this.setDatePicker(dateText)//inc_date
+        this.setDatePicker(receiptDateText)//inc_receipt_date
 
         /*---------------------set bac dropdown-------------------------*/
-        service_bankACC.get_bankAccount(object : VolleyCallback {
-            override fun onSuccess(result: JSONObject) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        bacText.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+                bacText.setError(null)
             }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+        })
+
+        service_bankACC.get_bankAccount(object : VolleyCallback {
             override fun onSuccess(result: String) {
                 val bac_frm_svc = JSONArray(result)
 
@@ -123,11 +117,9 @@ class add_income : Fragment(){
                         bac_frm_svc.getJSONObject(it).getString("bacName")
                     )
                 }
-                val bac_test = arrayOf("Ruangwit", "Wongwarit", "Krisana")
 
                 //Create Array Adapter
                 val adapter = ArrayAdapter<BankAccount>(activity, android.R.layout.simple_dropdown_item_1line, bac)
-                //adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
                 bacText.setAdapter(adapter)
             }
         })
@@ -138,9 +130,108 @@ class add_income : Fragment(){
             bacText.showDropDown()
         }
         bacText.setOnItemClickListener(OnItemClickListener { arg0, arg1, arg2, arg3->
-            bacId.setText(arg0.getItemIdAtPosition(arg2).toInt())
+            val result = arg0.getItemAtPosition(arg2) as BankAccount
+            result.bacId
+            bacId.setText(result.bacId.toString())//TextView in layout is visible = gone
         })
 
+        /*---------------------set desc dropdown-------------------------*/
+        descText.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+                descText.setError(null)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+        })
+
+        service_desc.get_desc_by_desctype(1, object : VolleyCallback {
+            override fun onSuccess(result: String) {
+                val desc_frm_srv = JSONArray(result)
+                val desc = ArrayList<Desc>()
+
+                (0 until desc_frm_srv.length()).mapTo(desc) {
+                    Desc(
+                        desc_frm_srv.getJSONObject(it).getInt("desc_id"),
+                        desc_frm_srv.getJSONObject(it).getString("desc_desid"),
+                        desc_frm_srv.getJSONObject(it).getString("desc_description"),
+                        desc_frm_srv.getJSONObject(it).getInt("desc_type")
+                    )
+                }
+                //Create Array Adapter
+                val adapter = ArrayAdapter<Desc>(activity, android.R.layout.simple_dropdown_item_1line, desc)
+                descText.setAdapter(adapter)
+            }
+        })
+        descText.setOnFocusChangeListener { v, hasFocus ->
+            descText.showDropDown()
+        }
+        descText.setOnClickListener {
+            descText.showDropDown()
+        }
+        descText.setOnItemClickListener(OnItemClickListener { arg0, arg1, arg2, arg3->
+            val result = arg0.getItemAtPosition(arg2) as Desc
+            result.desc_id
+            descId.setText(result.desc_id.toString())//TextView in layout is visible = gone
+        })
+
+
+
+        /*---------------------click save-------------------------*/
+        saveBtn.setOnClickListener {
+            if(this.validate()){
+
+            }else{
+                Toast.makeText(activity, "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    fun validate(): Boolean{
+        var result: Boolean = true
+        if(bacText.text.toString() == ""){
+            bacText.setError( "กรุณาเลือกบัญชีธนาคาร" )
+            result = false
+        }
+        if( amountText.text.toString() == "" ){
+            amountText.setError( "กรุณากรอกจำนวนเงิน" )
+            result = false
+        }
+        if(descText.text.toString() == ""){
+            descText.setError("กรุณาเลือกคำอธิบาย")
+            result = false
+        }
+        return result
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun setDatePicker(editText: EditText){
+        //for set date EditText
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+
+        //for date picker
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+        var date = TransformDate(current.format(formatter)).getThaiDate_1()
+        editText.setText(date)
+
+        editText.setOnClickListener {
+            val dpd = DatePickerDialog(activity, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                // Display Selected date in Toast
+                var dd = dayOfMonth.toString().padStart(2, '0')
+                var mm = (monthOfYear + 1).toString().padStart(2, '0')
+                editText.setText(TransformDate("$dd-$mm-$year").getThaiDate_1())
+            }, year, month, day)
+            dpd.show()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
