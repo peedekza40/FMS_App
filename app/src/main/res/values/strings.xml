@@ -11,6 +11,8 @@
     <string name="manage_accounting">จัดการรายการบัญชี รายรับ - รายจ่าย</string>
     <string name="report">รายงานรายการบัญชี</string>
     <string name="dashboard">แผนภูมิรายงานผล</string>
+    <string name="income_th">รายรับ</string>
+    <string name="payment_th">รายรับ</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

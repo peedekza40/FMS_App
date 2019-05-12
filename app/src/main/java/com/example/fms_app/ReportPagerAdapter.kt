@@ -1,6 +1,7 @@
 package com.example.fms_app
 
 import android.os.Bundle
+import android.provider.Settings.Secure.getString
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
@@ -35,13 +36,14 @@ class ReportPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm){
 
     override fun getPageTitle(position: Int): CharSequence? {
 
+
         when(position){
             0->{
-                return "income"
+                return "รายรับ"
             }
 
             1->{
-                return "payment"
+                return "รายจ่าย"
             }
         }
 
