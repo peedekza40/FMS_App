@@ -4,7 +4,7 @@ import org.json.JSONArray
 
 class BankAccount_data(var bacNo: String,
                        var bacName: String,
-                       var baId: String,
+                       var baName: String,
                        var bacBranch: String,
                        var bacBalance: String,
                        var bacCurBalance: String) {
@@ -14,7 +14,7 @@ class BankAccount_data(var bacNo: String,
             BankAccount_data(
                 data.getJSONObject(it).getString("bacNo"),
                 data.getJSONObject(it).getString("bacName"),
-                data.getJSONObject(it).getInt("baId").toString(),
+                data.getJSONObject(it).getString("baName"),
                 data.getJSONObject(it).getString("bacBranch"),
                 data.getJSONObject(it).getInt("bacBalance").toString(),
                 data.getJSONObject(it).getInt("bacCurBalance").toString()

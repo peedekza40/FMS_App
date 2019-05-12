@@ -1,5 +1,6 @@
 package com.example.fms_app
 
+import android.sax.StartElementListener
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -22,6 +23,7 @@ class BankAccountListAdapter(val datasource: ArrayList<BankAccount_data>): Recyc
         val bacData: BankAccount_data = datasource[p1]
         p0.binding(bacData)
     }
+
 }
 
 class BacViewHolder(inflater: LayoutInflater,parent: ViewGroup)
@@ -39,10 +41,10 @@ class BacViewHolder(inflater: LayoutInflater,parent: ViewGroup)
     }
 
     fun binding(bankAccount_data: BankAccount_data){
-        bacNo?.text = bankAccount_data.bacNo
-        baName?.text = bankAccount_data.bacName
-        baName?.text = bankAccount_data.baId
-        bacBalance?.text = bankAccount_data.bacBalance
+        bacNo?.text = "เลขที่บัญชี: " + bankAccount_data.bacNo
+        bacName?.text = "ชื่อบัญชีเงินฝาก: " + bankAccount_data.bacName
+        baName?.text = "ธนาคาร: " + bankAccount_data.baName
+        bacBalance?.text = "ยอดยกมา: " + bankAccount_data.bacBalance
     }
 
 }
