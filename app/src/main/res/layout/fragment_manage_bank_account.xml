@@ -17,20 +17,20 @@
             <TextView
                     android:text="รายการบัญชีเงินฝาก"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/textBac" android:textSize="18sp"
+                    android:layout_height="wrap_content" android:id="@+id/textDesc" android:textSize="18sp"
                     android:textStyle="bold" android:textAlignment="center" android:layout_marginTop="15dp"
                     android:layout_marginBottom="25dp"
             />
             <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:id="@+id/bac_recycler" android:background="#00FFFFFF">
+                    android:layout_height="match_parent" android:id="@+id/desc_recycler" android:background="#00FFFFFF">
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
         <android.support.design.widget.FloatingActionButton
                 android:src="@drawable/ic_add_black_24dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true" android:id="@+id/add_bac_btn" android:backgroundTint="#2196F3"
+                android:clickable="true" android:id="@+id/add_desc_btn" android:backgroundTint="#2196F3"
                 app:backgroundTint="@color/white" android:adjustViewBounds="true" app:fabSize="auto"
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="32dp" android:layout_marginEnd="32dp"/>

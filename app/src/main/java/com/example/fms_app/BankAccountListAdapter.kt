@@ -1,11 +1,9 @@
 package com.example.fms_app
 
-import android.sax.StartElementListener
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
-import java.util.zip.Inflater
 import kotlinx.android.synthetic.main.bac_list_view.view.*
 
 class BankAccountListAdapter(val datasource: ArrayList<BankAccount_data>): RecyclerView.Adapter<BacViewHolder>() {

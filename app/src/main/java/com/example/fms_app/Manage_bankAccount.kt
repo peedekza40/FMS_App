@@ -1,17 +1,14 @@
 package com.example.fms_app
 
 
-import android.app.DownloadManager
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
@@ -47,8 +44,8 @@ class Manage_bankAccount : Fragment() {
                     var json = JSONArray(response)
                     var data_bac = BankAccount_data("","","","","","")
                     val bac_data = data_bac.mappingData(json)
-                    bac_recycler.layoutManager = LinearLayoutManager(requireActivity())
-                    bac_recycler.adapter = BankAccountListAdapter(bac_data)
+                    desc_recycler.layoutManager = LinearLayoutManager(requireActivity())
+                    desc_recycler.adapter = BankAccountListAdapter(bac_data)
                 }catch (err : JSONException){
 
                 }
@@ -56,7 +53,7 @@ class Manage_bankAccount : Fragment() {
             ,Response.ErrorListener { Toast.makeText(activity,"error",Toast.LENGTH_SHORT).show() })
         stringRequest.tag = TAG
         requestQueue?.add(stringRequest)
-        val fab_add = getView()?.findViewById<FloatingActionButton>(R.id.add_bac_btn)
+        val fab_add = getView()?.findViewById<FloatingActionButton>(R.id.add_desc_btn)
 //        val pencil_btn = getView()?.findViewById<ImageButton>(R.id.pen_bac_btn)
 
         fab_add?.setOnClickListener {
