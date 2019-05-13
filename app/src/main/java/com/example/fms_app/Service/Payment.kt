@@ -16,7 +16,7 @@ import com.example.fms_app.Service.Conifg_service
 
 
 
-class Income(
+class Payment(
     val context: Context,
     val cacheDir: File): Conifg_service(context, cacheDir){
 
@@ -24,7 +24,7 @@ class Income(
     }
 
     fun get_all(callback: VolleyCallback){
-        url += "/get_all_income"
+        url += "/get_all_payment"
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
             Request.Method.GET, url,
@@ -41,8 +41,8 @@ class Income(
         requestQueue?.add(stringRequest)
     }
 
-    fun get_last_inc_code(callback: VolleyCallback){
-        url += "/get_last_inc_code"
+    fun get_last_pay_code(callback: VolleyCallback){
+        url += "/get_last_pay_code"
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
             Request.Method.GET, url,
@@ -59,7 +59,7 @@ class Income(
     }
 
     fun insert(callback: VolleyCallback){
-        url += "/insert_income"
+        url += "/insert_payment"
         val jsonBody = JSONObject()
         //jsonBody.put("")
         // Request a string response from the provided URL.
@@ -76,7 +76,7 @@ class Income(
     }
 
     fun getByRangeDate(callback: VolleyCallback){
-        url += "/get_income_by_rangedate_and_bac"
+        url += "/get_by_pay_bac_id_and_date"
         val jsonBody = JSONObject()
 
     }

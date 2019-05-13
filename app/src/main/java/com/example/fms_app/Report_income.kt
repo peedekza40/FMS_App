@@ -1,9 +1,11 @@
 package com.example.fms_app
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,6 +50,30 @@ class Report_income: Fragment(){
             }
         })
 
+        Income_recycler.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val positionView = (Income_recycler.getLayoutManager() as LinearLayoutManager).findFirstVisibleItemPosition()
+
+                if (positionView > 0) {
+                    if(!Search_income_FAV.isShown) {
+                        Search_income_FAV.show();
+                    }
+                } else  {
+                    if(Search_income_FAV.isShown) {
+                        Search_income_FAV.hide();
+                    }
+                }
+            }
+
+        })
+
+        Search_income_FAV.setOnClickListener {
+            var intent: Intent = Intent(activity!!.applicationContext,Report_Filter::class.java)
+            startActivity(intent)
+        }
 
     }
 
