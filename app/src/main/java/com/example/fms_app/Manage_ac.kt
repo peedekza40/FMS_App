@@ -4,10 +4,18 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import android.widget.Toast
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.fragment_manage_ac.*
+import org.json.JSONArray
+import org.json.JSONException
+import java.io.UnsupportedEncodingException
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +36,7 @@ class Manage_ac : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
-
+    private val TAG = "SERVICE_Report"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -64,6 +72,35 @@ class Manage_ac : Fragment() {
         super.onDetach()
         listener = null
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val requestQueue = Volley.newRequestQueue(requireActivity())
+        val url = "http://www.mocky.io/v2/5cd9b5aa3000006621c017cd"
+        val stringRequest = serviceDataUTF8Encoding( Request.Method.GET, url,
+            Response.Listener<String> { response ->
+                try {
+                    var json = JSONArray(response)
+                    var data_report = get_data_table("",0.0)
+                    val data_table = data_report.mapingData(json)
+                    //test_incomedata.text = data_income[0].Code
+                    table_recycle_view.layoutManager = LinearLayoutManager(requireActivity())
+                    table_recycle_view.adapter = table_Adapter(data_table)
+                }catch(e: JSONException){
+                  //  test_incomedata.text = e.message
+                }
+
+            },
+            Response.ErrorListener { Toast.makeText(activity, "error",Toast.LENGTH_LONG).show() })
+
+        stringRequest.tag = this.TAG
+        requestQueue?.add(stringRequest)
+
+    }
+
+
+
 
     /**
      * This interface must be implemented by activities that contain this
