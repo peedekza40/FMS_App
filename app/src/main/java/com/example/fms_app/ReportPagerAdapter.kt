@@ -36,7 +36,6 @@ class ReportPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm){
 
     override fun getPageTitle(position: Int): CharSequence? {
 
-
         when(position){
             0->{
                 return "รายรับ"
