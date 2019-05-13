@@ -11,10 +11,10 @@ class Report_data(var Code: String,
         var reportDataListArr = ArrayList<Report_data>()
         (0 until data.length()).mapTo(reportDataListArr) {
             Report_data(
-                data.getJSONObject(it).getString("Code"),
-                data.getJSONObject(it).getString("Detail"),
-                data.getJSONObject(it).getString("Date"),
-                data.getJSONObject(it).getInt("Balance").toString()
+                data.getJSONObject(it).getString("inc_code"),
+                data.getJSONObject(it).getString("inc_desc_id"),
+                data.getJSONObject(it).getString("inc_date"),
+                data.getJSONObject(it).getString("inc_amount")
             )
 
         }
