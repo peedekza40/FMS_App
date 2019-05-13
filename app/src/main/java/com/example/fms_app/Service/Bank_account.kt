@@ -12,6 +12,7 @@ class Bank_account (
     val context: Context,
     val cacheDir: File) : Conifg_service(context, cacheDir){
 
+    val TAG = "Service Bac"
     fun get_bankAccount(callback: VolleyCallback){
         url += "/get_bankAccount"
         // Request a string response from the provided URL.
@@ -24,9 +25,12 @@ class Bank_account (
                     response-> Log.d("Service error",response.toString())
             }
         )
-        stringRequest.tag = "Service FMS"
+        stringRequest.tag = TAG
         // Add the request to the RequestQueue.
         requestQueue?.add(stringRequest)
     }
 
+    fun cancleRequest(){
+        requestQueue?.cancelAll(TAG)
+    }
 }
