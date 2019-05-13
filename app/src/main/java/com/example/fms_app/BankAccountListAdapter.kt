@@ -32,18 +32,18 @@ class BacViewHolder(inflater: LayoutInflater,parent: ViewGroup)
     : RecyclerView.ViewHolder(inflater.inflate(R.layout.bac_list_view,parent,false)){
     var bacNo:TextView? = null
     var bacName:TextView? = null
-    var baId:TextView? = null
+    var baCode:TextView? = null
     var bacBalance:TextView? = null
 
     init {
         bacName = itemView.bacName
-        baId  = itemView.baId
+        baCode  = itemView.baCode
         bacBalance = itemView.bac_branch
     }
 
     fun binding(bankAccount_data: BankAccount_data){
         bacName?.text = "ชื่อบัญชี: " + bankAccount_data.bacName
-        baId?.text = "ธนาคาร: " + bankAccount_data.baId
+        baCode?.text = "ธนาคาร: " + bankAccount_data.baCode
         bacBalance?.text = "คงเหลือ: " + bankAccount_data.bacBalance + ".-"
     }
 

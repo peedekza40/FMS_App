@@ -51,7 +51,7 @@ class Manage_bankAccount : Fragment() {
         serviceBac.get_bankAccount(object : VolleyCallback {
             override fun onSuccess(result: String) {
                 val bac_frm_svc = JSONArray(result)
-                var data_bac = BankAccount_data(0,"","","","",0,0,"",0,0,0,"")
+                var data_bac = BankAccount_data(0,"","","","","","",0,0,"")
                 val bac_data = data_bac.mappingData(bac_frm_svc)
 //                val bac = ArrayList<BankAccount>()
                 bac_recycler.layoutManager = LinearLayoutManager(requireActivity())
@@ -77,6 +77,7 @@ class Manage_bankAccount : Fragment() {
                 })
             }
         })
+//        ------------------------------- mocky -----------------------------------
 //        val url = "http://www.mocky.io/v2/5cd9d306300000b821c0185a"
 //        val stringRequest = serviceDataUTF8Encoding(Request.Method.GET,url,
 //            Response.Listener<String> { response ->
