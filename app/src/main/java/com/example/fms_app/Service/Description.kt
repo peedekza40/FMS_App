@@ -14,6 +14,9 @@ class Description (
     val context: Context,
     val cacheDir: File) : Conifg_service(context, cacheDir){
 
+    init {
+    }
+
     fun get_desc_by_desctype(desctype : Int, callback: VolleyCallback){
         url += "/get_desc_by_desctype/" + desctype
 

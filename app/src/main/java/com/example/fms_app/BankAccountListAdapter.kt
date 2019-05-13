@@ -32,9 +32,9 @@ class BacViewHolder(inflater: LayoutInflater,parent: ViewGroup)
     var bacBalance:TextView? = null
 
     init {
-        bacNo = itemView.bacNo
-        bacName = itemView.bacName
-        baName  = itemView.baName
+        bacNo = itemView.descNo
+        bacName = itemView.descId
+        baName  = itemView.descName
         bacBalance = itemView.bacBalance
     }
 
