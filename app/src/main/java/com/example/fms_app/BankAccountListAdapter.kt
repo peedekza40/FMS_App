@@ -1,6 +1,8 @@
 package com.example.fms_app
 
+import android.content.Intent
 import android.sax.StartElementListener
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -30,21 +32,19 @@ class BacViewHolder(inflater: LayoutInflater,parent: ViewGroup)
     : RecyclerView.ViewHolder(inflater.inflate(R.layout.bac_list_view,parent,false)){
     var bacNo:TextView? = null
     var bacName:TextView? = null
-    var baName:TextView? = null
+    var baId:TextView? = null
     var bacBalance:TextView? = null
 
     init {
-        bacNo = itemView.bacNo
         bacName = itemView.bacName
-        baName  = itemView.baName
-        bacBalance = itemView.bacBalance
+        baId  = itemView.baId
+        bacBalance = itemView.bac_branch
     }
 
     fun binding(bankAccount_data: BankAccount_data){
-        bacNo?.text = "เลขที่บัญชี: " + bankAccount_data.bacNo
-        bacName?.text = "ชื่อบัญชีเงินฝาก: " + bankAccount_data.bacName
-        baName?.text = "ธนาคาร: " + bankAccount_data.baName
-        bacBalance?.text = "ยอดยกมา: " + bankAccount_data.bacBalance
+        bacName?.text = "ชื่อบัญชี: " + bankAccount_data.bacName
+        baId?.text = "ธนาคาร: " + bankAccount_data.baId
+        bacBalance?.text = "คงเหลือ: " + bankAccount_data.bacBalance + ".-"
     }
 
 }

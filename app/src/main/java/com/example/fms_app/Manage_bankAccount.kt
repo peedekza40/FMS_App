@@ -7,15 +7,21 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
+import com.example.fms_app.Data_class.BankAccount
+import com.example.fms_app.Service.Bank_account
+import com.example.fms_app.Service.VolleyCallback
+import kotlinx.android.synthetic.main.fragment_add_income.*
 import kotlinx.android.synthetic.main.fragment_manage_bank_account.*
 import org.json.JSONArray
 import org.json.JSONException
@@ -40,22 +46,54 @@ class Manage_bankAccount : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val requestQueue = Volley.newRequestQueue(requireActivity())
-        val url = "http://www.mocky.io/v2/5cd8353d300000a22a74cd4c"
-        val stringRequest = serviceDataUTF8Encoding(Request.Method.GET,url,
-            Response.Listener<String> { response ->
-                try{
-                    var json = JSONArray(response)
-                    var data_bac = BankAccount_data("","","","","","")
-                    val bac_data = data_bac.mappingData(json)
-                    bac_recycler.layoutManager = LinearLayoutManager(requireActivity())
-                    bac_recycler.adapter = BankAccountListAdapter(bac_data)
-                }catch (err : JSONException){
+        val serviceBac = Bank_account(activity!!.applicationContext,activity!!.cacheDir)
 
-                }
+        serviceBac.get_bankAccount(object : VolleyCallback {
+            override fun onSuccess(result: String) {
+                val bac_frm_svc = JSONArray(result)
+                var data_bac = BankAccount_data(0,"","","","",0,0,"",0,0,0,"")
+                val bac_data = data_bac.mappingData(bac_frm_svc)
+//                val bac = ArrayList<BankAccount>()
+                bac_recycler.layoutManager = LinearLayoutManager(requireActivity())
+                bac_recycler.adapter = BankAccountListAdapter(bac_data)
+                bac_recycler.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+
+                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        super.onScrolled(recyclerView, dx, dy)
+
+                        val positionView = (bac_recycler.getLayoutManager() as LinearLayoutManager).findFirstVisibleItemPosition()
+
+                        if (positionView > 0) {
+                            if(!add_bac_btn.isShown) {
+                                add_bac_btn.show();
+                            }
+                        } else  {
+                            if(add_bac_btn.isShown) {
+                                add_bac_btn.hide();
+                            }
+                        }
+                    }
+
+                })
             }
-            ,Response.ErrorListener { Toast.makeText(activity,"error",Toast.LENGTH_SHORT).show() })
-        stringRequest.tag = TAG
-        requestQueue?.add(stringRequest)
+        })
+//        val url = "http://www.mocky.io/v2/5cd9d306300000b821c0185a"
+//        val stringRequest = serviceDataUTF8Encoding(Request.Method.GET,url,
+//            Response.Listener<String> { response ->
+//                try{
+//                    var json = JSONArray(response)
+//                    var data_bac = BankAccount_data("","","","","","")
+//                    val bac_data = data_bac.mappingData(json)
+//                    bac_recycler.layoutManager = LinearLayoutManager(requireActivity())
+//                    bac_recycler.adapter = BankAccountListAdapter(bac_data)
+//                }catch (err : JSONException){
+//
+//                }
+//            }
+//            ,Response.ErrorListener { Toast.makeText(activity,"error",Toast.LENGTH_SHORT).show() })
+//        stringRequest.tag = TAG
+//        requestQueue?.add(stringRequest)
+
         val fab_add = getView()?.findViewById<FloatingActionButton>(R.id.add_bac_btn)
 //        val pencil_btn = getView()?.findViewById<ImageButton>(R.id.pen_bac_btn)
 

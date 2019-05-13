@@ -53,7 +53,6 @@ class Report_income: Fragment(){
 
             },
             Response.ErrorListener { Toast.makeText(activity, "error",Toast.LENGTH_LONG).show() })
-
         stringRequest.tag = this.TAG
         requestQueue?.add(stringRequest)
 

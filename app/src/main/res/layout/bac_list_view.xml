@@ -10,53 +10,33 @@
             android:layout_height="wrap_content">
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="code"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:id="@+id/bacNo" android:layout_marginStart="21dp" android:textStyle="bold"
-                android:textSize="18sp" android:layout_marginTop="15dp"/>
-        <ImageButton
-                android:id="@+id/pen_bac_btn"
-                android:layout_width="25dp" android:layout_height="25dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginEnd="6dp"
-                android:layout_marginStart="4dp"
-                android:maxLines="1"
-                android:paddingEnd="4dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp" android:background="@android:drawable/ic_menu_edit"/>
-        <TextView
                 android:id="@+id/bacName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/bacNo"
-                android:layout_alignTop="@id/bacNo"
-                tools:text="bacName" android:layout_marginTop="27dp" android:layout_marginEnd="35dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                tools:text="bacName" android:layout_marginTop="15dp" android:layout_marginEnd="35dp"
                 android:textStyle="bold" android:textSize="18sp"
-                android:layout_marginStart="21dp"/>
-        <TextView
-                android:id="@+id/baName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="baName"
-                android:layout_below="@+id/bacName"
-                android:layout_alignTop="@id/bacName"
-                android:layout_marginTop="29dp" android:textSize="18sp" android:textStyle="bold"
                 android:layout_marginStart="21dp"/>
 
         <TextView
-                android:id="@+id/bacBalance"
+                android:id="@+id/baId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="date"
-                android:layout_below="@+id/baName"
-                android:layout_alignTop="@id/baName"
-                android:layout_marginTop="31dp" android:textSize="18sp" android:textStyle="bold"
-                android:layout_marginStart="21dp" android:layout_marginBottom="15dp"
-                />
+                tools:text="baId"
+                android:layout_below="@+id/bacName"
+                android:layout_alignTop="@id/bacName"
+                android:layout_marginTop="29dp" android:textSize="16sp"
+                android:layout_marginStart="21dp" />
+        <TextView
+                android:text="bacBranch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/bac_branch"
+                android:layout_below="@id/baId"
+                android:textSize="16dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="21dp" android:layout_marginBottom="15dp"/>
+
         <View
                 android:layout_width="400dp"
                 android:layout_height="1dp"
