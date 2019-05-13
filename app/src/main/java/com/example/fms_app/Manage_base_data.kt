@@ -3,11 +3,16 @@ package com.example.fms_app
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_manage_base_data.*
+import kotlinx.android.synthetic.main.fragment_report.*
+
 import kotlinx.android.synthetic.main.fragment_manage_ac.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -44,7 +49,16 @@ class Manage_base_data : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_manage_base_data, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_manage_base_data, container, false)
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val viewPager: ViewPager = BaseData_viewpager
+        val tabLayout: TabLayout = BaseData_tabbar
+        viewPager.adapter = BaseDataPagerAdapter(childFragmentManager)
+        tabLayout.setupWithViewPager(viewPager)
     }
 
     // TODO: Rename method, update argument and hook method into UI event

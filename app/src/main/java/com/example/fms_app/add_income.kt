@@ -343,5 +343,3 @@ class add_income : Fragment(){
     }
 
 }
-
-
