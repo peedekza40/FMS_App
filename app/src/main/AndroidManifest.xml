@@ -5,19 +5,25 @@
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
-            android:usesCleartextTraffic="true"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="FMS"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:usesCleartextTraffic="true">
+
         <!--<activity
                 android:name=".TabbedTest"
                 android:label="@string/title_activity_tabbed_test"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>-->
+
+
         <activity android:name=".Add_accounting">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"

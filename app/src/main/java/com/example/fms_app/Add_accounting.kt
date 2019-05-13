@@ -17,28 +17,43 @@ import com.example.fms_app.Service.Income
 import com.example.fms_app.Service.VolleyCallback
 import org.json.JSONArray
 import kotlinx.android.synthetic.main.activity_add_accounting.*
+import android.support.v4.view.ViewPager
+import android.support.design.widget.TabLayout
+import android.widget.EditText
+import android.widget.Toast
+import kotlinx.android.synthetic.main.fragment_add_income.*
+
 
 class Add_accounting : AppCompatActivity() {
+
     var requestQueue: RequestQueue? = null
-    @RequiresApi(Build.VERSION_CODES.O)
+    private var tapAdapter: TabAdapter? = null
+    private var tabLayout: TabLayout? = null
+    private var viewPager: ViewPager? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_accounting)
 
+        /*-----------------set action bar-------------------*/
         //actionbar
         val actionbar = supportActionBar
         //set actionbar title
         actionbar!!.title = "เพิ่มรายการบัญชี"
         //set back button
         actionbar.setDisplayHomeAsUpEnabled(true)
-        val service_income = Income(this,cacheDir)
-        service_income.get_all(object : VolleyCallback {
-            override fun onSuccess(result: String) {
-                //codeText.text = JSONArray(result).getJSONObject(0).getString("inc_code")
-            }
-        })
-    }
 
+        /*-----------------set tap-------------------*/
+        viewPager = findViewById(R.id.viewPager)
+        tabLayout = findViewById(R.id.tabLayout)
+        tapAdapter = TabAdapter(supportFragmentManager)
+
+        tapAdapter!!.addFragment(add_income(), "รายรับ")
+        tapAdapter!!.addFragment(add_payment(), "รายจ่าย")
+
+        viewPager!!.setAdapter(tapAdapter)
+        tabLayout!!.setupWithViewPager(viewPager)
+    }
 
 
 
