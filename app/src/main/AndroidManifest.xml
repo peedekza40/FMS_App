@@ -18,6 +18,10 @@
         </activity>
         <activity android:name=".Add_description">
         </activity>
+        <activity android:name=".Edit_bank">
+        </activity>
+        <activity android:name=".Add_bank">
+        </activity>
         <activity android:name=".Edit_bankaccount">
         </activity>
         <activity android:name=".Add_bankAccount">

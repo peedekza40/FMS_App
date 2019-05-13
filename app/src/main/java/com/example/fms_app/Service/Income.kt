@@ -23,8 +23,8 @@ class Income(
     init {
     }
 
-    fun get_all(callback: VolleyCallback){
-        url += "/get_all_income"
+    fun get_bank(callback: VolleyCallback){
+        url += "/get_bank"
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
             Request.Method.GET, url,
@@ -41,25 +41,8 @@ class Income(
         requestQueue?.add(stringRequest)
     }
 
-    fun get_last_inc_code(callback: VolleyCallback){
-        url += "/get_last_inc_code"
-        // Request a string response from the provided URL.
-        val stringRequest = StringRequest(
-            Request.Method.GET, url,
-            Response.Listener<String> { response ->
-                callback.onSuccess(response)
-            },
-            Response.ErrorListener {
-                    response-> Log.d("Service error",response.toString())
-            }
-        )
-        stringRequest.tag = "Service FMS"
-        // Add the request to the RequestQueue.
-        requestQueue?.add(stringRequest)
-    }
-
     fun insert(callback: VolleyCallback){
-        url += "/insert_income"
+        url += "/insert_bank"
         val jsonBody = JSONObject()
         //jsonBody.put("")
         // Request a string response from the provided URL.

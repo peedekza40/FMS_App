@@ -81,12 +81,12 @@ class add_income : Fragment(){
 
 
         /*----------------------set inc_code------------------------------------*/
-        service_income.get_last_inc_code(object : VolleyCallback {
-            override fun onSuccess(result: String) {
-                val last_code = JSONArray(result).getJSONObject(0).getString("inc_code")
-                codeText.setText(gen_inc_code(last_code))
-            }
-        })
+//        service_income.get_last_inc_code(object : VolleyCallback {
+//            override fun onSuccess(result: String) {
+//                val last_code = JSONArray(result).getJSONObject(0).getString("inc_code")
+//                codeText.setText(gen_inc_code(last_code))
+//            }
+//        })
         /*---------------------set datepicker-------------------------*/
         this.setDatePicker(dateText)//inc_date
         this.setDatePicker(receiptDateText)//inc_receipt_date
