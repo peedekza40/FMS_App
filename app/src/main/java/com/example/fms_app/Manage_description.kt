@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +35,7 @@ class Manage_description : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }
+    }//onCreate
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,27 +49,33 @@ class Manage_description : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val service_desc = Description(activity!!.applicationContext, activity!!.cacheDir)
-        /*----------------------set inc_code------------------------------------*/
-        service_desc.get_desc_by_desctype(1,object : VolleyCallback {
+        /*----------------------get all description------------------------------------*/
+        service_desc.get_all_desc(object : VolleyCallback {
             override fun onSuccess(result: String) {
                 val desc_frm_srv = JSONArray(result)
                 var data_desc = Description_data("","",0)
                 val desc_data = data_desc.mappingData(desc_frm_srv)
                 desc_recycler.layoutManager = LinearLayoutManager(requireActivity())
                 desc_recycler.adapter = DescriptionListAdapter(desc_data)
-                //val desc = ArrayList<Description_data>()
+                desc_recycler.addOnScrollListener(object : RecyclerView.OnScrollListener(){
 
-                /*(0 until desc_frm_srv.length()).mapTo(desc) {
-                    Description_data(
-                        desc_frm_srv.getJSONObject(it).getString("desc_desid"),
-                        desc_frm_srv.getJSONObject(it).getString("desc_description"),
-                        desc_frm_srv.getJSONObject(it).getInt("desc_type")
-                    )
-                }*/
-                //Create Array Adapter
-                /*val adapter = ArrayAdapter<Description_data>(activity, R.layout.desc_list_view, desc)
-                descText.setAdapter(adapter)*/
-            }
+                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        super.onScrolled(recyclerView, dx, dy)
+
+                        val positionView = (desc_recycler.getLayoutManager() as LinearLayoutManager).findFirstVisibleItemPosition()
+
+                        if (positionView > 0) {
+                            if(!add_desc_btn.isShown) {
+                                add_desc_btn.show();
+                            }//if
+                        } else  {
+                            if(add_desc_btn.isShown) {
+                                add_desc_btn.hide();
+                            }//if
+                        }//else
+                    }//onScrolled
+                })
+            }//onSuccess
         })
 
         /*----------------------Mock Data------------------------------------*/
@@ -88,13 +95,12 @@ class Manage_description : Fragment() {
             }
             , Response.ErrorListener { Toast.makeText(activity,"error", Toast.LENGTH_SHORT).show() })
         stringRequest.tag = TAG
-        requestQueue?.add(stringRequest)
-        val fab_add = getView()?.findViewById<FloatingActionButton>(R.id.add_desc_btn)*/
+        requestQueue?.add(stringRequest)*/
+        val fab_add = getView()?.findViewById<FloatingActionButton>(R.id.add_desc_btn)
 
-        /*fab_add?.setOnClickListener {
-            var intent = Intent(activity,Add_bankAccount::class.java)
+        fab_add?.setOnClickListener {
+            var intent = Intent(activity,Add_description::class.java)
             startActivity(intent)
-        }*/
-    }
-
-}
+        }
+    }//onViewCreated
+}//Manage_description

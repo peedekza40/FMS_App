@@ -33,6 +33,24 @@ class Description (
         stringRequest.tag = "Service FMS"
         // Add the request to the RequestQueue.
         requestQueue?.add(stringRequest)
-    }
+    }//get_desc_by_desctype
+
+    fun get_all_desc(callback: VolleyCallback){
+        url += "/get_all_desc"
+
+        // Request a string response from the provided URL.
+        val stringRequest = StringRequest(
+            Request.Method.GET, url,
+            Response.Listener<String> { response ->
+                callback.onSuccess(response)
+            },
+            Response.ErrorListener {
+                    response-> Log.d("Service error",response.toString())
+            }
+        )
+        stringRequest.tag = "Service FMS"
+        // Add the request to the RequestQueue.
+        requestQueue?.add(stringRequest)
+    }//get_all_desc
 
 }

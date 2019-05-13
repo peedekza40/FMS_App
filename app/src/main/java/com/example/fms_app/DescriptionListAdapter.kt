@@ -15,16 +15,16 @@ class DescriptionListAdapter(val datasource: ArrayList<Description_data>): Recyc
         val mView = LayoutInflater.from(p0.context)
         val mViewHolder = DescViewHolder(mView,p0)
         return mViewHolder
-    }
+    }//onCreateViewHolder
 
     override fun getItemCount(): Int {
         return datasource.size
-    }
+    }//getItemCount
 
     override fun onBindViewHolder(p0: DescViewHolder, p1: Int) {
         val descData: Description_data = datasource[p1]
         p0.binding(descData)
-    }
+    }//onBindViewHolder
 }
 
 class DescViewHolder(inflater: LayoutInflater, parent: ViewGroup)
@@ -40,6 +40,5 @@ class DescViewHolder(inflater: LayoutInflater, parent: ViewGroup)
     fun binding(description_data: Description_data){
         descId?.text = description_data.desc_desid
         descName?.text = description_data.desc_description
-    }
-
-}
+    }//binding
+}//DescViewHolder

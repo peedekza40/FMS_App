@@ -15,5 +15,5 @@ class Description_data(var desc_desid: String,
             )
         }
         return descDataListArray
-    }
-}
+    }//mappingData
+}//Description_data
