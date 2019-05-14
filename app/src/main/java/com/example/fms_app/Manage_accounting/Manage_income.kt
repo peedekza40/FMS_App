@@ -32,6 +32,7 @@ class Manage_income : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_manage_income, container, false)
+
     }
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
