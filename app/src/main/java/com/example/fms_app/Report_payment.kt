@@ -1,28 +1,24 @@
 package com.example.fms_app
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListAdapter
-import android.widget.Toast
-import com.android.volley.Request
-import com.android.volley.RequestQueue
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.fragment_report_income.*
+import com.example.fms_app.Service.Payment
+import com.example.fms_app.Service.VolleyCallback
 import kotlinx.android.synthetic.main.fragment_report_payment.*
 import org.json.JSONArray
 import org.json.JSONException
-import java.io.Serializable
+import org.json.JSONObject
 
 class Report_payment: Fragment(){
 
-    private val TAG = "SERVICE_Report"
-    //private var requestQueue: RequestQueue?  = null
+    private var startDate: String? = Report_Filter().date_start
+    private var endDate: String? = Report_Filter().date_end
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,27 +33,49 @@ class Report_payment: Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val requestQueue = Volley.newRequestQueue(requireActivity())
-        val url = "http://www.mocky.io/v2/5ccfeff6320000b52100f90e"
-        val stringRequest = serviceDataUTF8Encoding( Request.Method.GET, url,
-            Response.Listener<String> { response ->
+        val service_payment = Payment(activity!!.applicationContext,activity!!.cacheDir)
+        service_payment.get_all(object : VolleyCallback {
+            override fun onSuccess(result: JSONObject) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
 
+            override fun onSuccess(result: String) {
                 try {
-                    var json = JSONArray(response)
+                    var json = JSONArray(result)
                     var data_report = Report_data("","","","")
-                    val data_payment = data_report.mapingData(json)
-                    //test_paymentdata.text = data_payment[0].Code
+                    val data_payment = data_report.mapingData_payment(json)
                     Payment_recycler.layoutManager = LinearLayoutManager(requireActivity())
                     Payment_recycler.adapter = ReportListAdapter(data_payment)
                 }catch (e: JSONException){
-                    test_paymentdata.text = e.message
+                    test_paymentdata.text = "Data not found or Service connection error"
                 }
+            }
+        })
 
-            },
-            Response.ErrorListener { Toast.makeText(activity,"Error", Toast.LENGTH_LONG).show() })
+        Payment_recycler.addOnScrollListener(object : RecyclerView.OnScrollListener(){
 
-        stringRequest.tag = this.TAG
-        requestQueue?.add(stringRequest)
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val positionView = (Payment_recycler.getLayoutManager() as LinearLayoutManager).findFirstVisibleItemPosition()
+
+                if (positionView > 0) {
+                    if(Search_payment_FAV.isShown) {
+                        Search_payment_FAV.hide()
+                    }
+                } else  {
+                    if(!Search_payment_FAV.isShown) {
+                        Search_payment_FAV.show()
+                    }
+                }
+            }
+
+        })
+
+        Search_payment_FAV.setOnClickListener {
+            var intent: Intent = Intent(activity!!.applicationContext,Report_Filter::class.java)
+            startActivity(intent)
+        }
 
     }
 

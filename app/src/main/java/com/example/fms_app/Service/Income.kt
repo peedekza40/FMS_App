@@ -86,6 +86,25 @@ class Income(
         requestQueue?.add(objectRequest)
     }
 
+    fun get_all_rangedate_bacid(date_start:String?,date_end: String?,bacId: String?,callback: VolleyCallback){
+        url = ip
+        url += "/get_income_by_rangedate_and_bac/${bacId}/${date_start}/${date_end}"
+        // Request a string response from the provided URL.
+        val stringRequest = StringRequest(
+            Request.Method.GET, url,
+            Response.Listener<String> { response ->
+                //val accounting = JSONArray(response)
+                callback.onSuccess(response)
+            },
+            Response.ErrorListener {
+                    response-> Log.d("Service error",response.toString())
+            }
+        )
+        stringRequest.tag = TAG
+        // Add the request to the RequestQueue.
+        requestQueue?.add(stringRequest)
+    }
+
     fun cancleRequest(){
         requestQueue?.cancelAll(TAG)
     }

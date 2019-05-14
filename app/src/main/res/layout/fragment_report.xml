@@ -12,7 +12,8 @@
         <android.support.design.widget.TabLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/Report_tabbar"
-                app:tabIndicatorColor="@color/colorAccent" app:tabBackground="@color/colorPrimary">
+                app:tabIndicatorColor="@color/colorAccent" app:tabBackground="@color/colorPrimary"
+                app:tabTextColor="#FFFFFF" app:tabIndicatorHeight="4dp">
         </android.support.design.widget.TabLayout>
 
     </android.support.v4.view.ViewPager>
