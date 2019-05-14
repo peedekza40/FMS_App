@@ -81,11 +81,11 @@ class Manage_ac : Fragment() {
 
         val object_ma:Income = Income(activity!!,cacheDir = activity!!.cacheDir)
 
-        /*----------------------set inc_code------------------------------------*/
+        /*----------------------get_all_income------------------------------------*/
         object_ma.get_all(object : VolleyCallback {
             override fun onSuccess(result: String) {
                 var json = JSONArray(result)
-                    var data_report = get_data_table(0.00)
+                    var data_report = get_data_table("",0.00)
                     val data_table = data_report.mapingData(json)
                     //test_incomedata.text = data_income[0].Code
                     table_recycle_view.layoutManager = LinearLayoutManager(requireActivity())

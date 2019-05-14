@@ -24,7 +24,7 @@ class Income(
     }
 
     fun get_all(callback: VolleyCallback){
-        url += "/get_all_income"
+        url += "/Income_service/get_all_income"
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
             Request.Method.GET, url,
