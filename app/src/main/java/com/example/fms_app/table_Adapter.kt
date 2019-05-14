@@ -28,21 +28,21 @@ class table_Adapter (val datasource: ArrayList<get_data_table>) : RecyclerView.A
 
 class ViewHolder(inflater: LayoutInflater, parent: ViewGroup)
     : RecyclerView.ViewHolder(inflater.inflate(R.layout.table_list, parent, false)){
-    var detail_table: TextView? = null
+   // var detail_table: TextView? = null
 
     var deatail_amount: TextView? = null
 
     init {
-        detail_table = itemView.deatail_table
+       // detail_table = itemView.deatail_table
 
         deatail_amount = itemView.deatail_amount
 
     }
 
     fun binding(get_data_table: get_data_table){
-        detail_table?.text = get_data_table.Detail
+        //detail_table?.text = get_data_table.inc_code
 
-        deatail_amount?.text = get_data_table.Amount.toString()
+        deatail_amount?.text = get_data_table.inc_amount.toString()
     }
 
 }

@@ -12,6 +12,9 @@ import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.Volley
+import com.example.fms_app.Service.Income
+import com.example.fms_app.Service.VolleyCallback
+import kotlinx.android.synthetic.main.fragment_add_income.*
 import kotlinx.android.synthetic.main.fragment_manage_ac.*
 import org.json.JSONArray
 import org.json.JSONException
@@ -76,27 +79,42 @@ class Manage_ac : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val requestQueue = Volley.newRequestQueue(requireActivity())
-        val url = "http://www.mocky.io/v2/5cd9b5aa3000006621c017cd"
-        val stringRequest = serviceDataUTF8Encoding( Request.Method.GET, url,
-            Response.Listener<String> { response ->
-                try {
-                    var json = JSONArray(response)
-                    var data_report = get_data_table("",0.0)
+        val object_ma:Income = Income(activity!!,cacheDir = activity!!.cacheDir)
+
+        /*----------------------set inc_code------------------------------------*/
+        object_ma.get_all(object : VolleyCallback {
+            override fun onSuccess(result: String) {
+                var json = JSONArray(result)
+                    var data_report = get_data_table(0.00)
                     val data_table = data_report.mapingData(json)
                     //test_incomedata.text = data_income[0].Code
                     table_recycle_view.layoutManager = LinearLayoutManager(requireActivity())
                     table_recycle_view.adapter = table_Adapter(data_table)
-                }catch(e: JSONException){
-                  //  test_incomedata.text = e.message
-                }
+                //val inc_code = JSONArray(result).getJSONObject(0).getString("inc_code")
+            }
+        })
 
-            },
-            Response.ErrorListener { Toast.makeText(activity, "error",Toast.LENGTH_LONG).show() })
-
-        stringRequest.tag = this.TAG
-        requestQueue?.add(stringRequest)
-
+//              val requestQueue = Volley.newRequestQueue(requireActivity())
+//        val url = "http://www.mocky.io/v2/5cd9b5aa3000006621c017cd"
+//        val stringRequest = serviceDataUTF8Encoding( Request.Method.GET, url,
+//            Response.Listener<String> { response ->
+//                try {
+//                    var json = JSONArray(response)
+//                    var data_report = get_data_table("",0.0)
+//                    val data_table = data_report.mapingData(json)
+//                    //test_incomedata.text = data_income[0].Code
+//                    table_recycle_view.layoutManager = LinearLayoutManager(requireActivity())
+//                    table_recycle_view.adapter = table_Adapter(data_table)
+//                }catch(e: JSONException){
+//                  //  test_incomedata.text = e.message
+//                }
+//
+//            },
+//            Response.ErrorListener { Toast.makeText(activity, "error",Toast.LENGTH_LONG).show() })
+//
+//        stringRequest.tag = this.TAG
+//        requestQueue?.add(stringRequest)
+//
     }
 
 

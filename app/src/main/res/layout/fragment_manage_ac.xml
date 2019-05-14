@@ -28,7 +28,7 @@
                     android:layout_marginTop="0dp" android:layout_marginStart="30dp" android:textStyle="bold"
                     android:textColor="@android:color/black"/>
             <TextView
-                    android:text="จำนนวนเงิน"
+                    android:text="จำนวนเงิน"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/amount"
                     android:layout_alignParentRight="true" android:layout_alignParentTop="true"
