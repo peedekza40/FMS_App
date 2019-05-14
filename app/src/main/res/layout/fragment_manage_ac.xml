@@ -4,47 +4,55 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".Manage_accounting.Manage_ac">
-    <LinearLayout
-            android:orientation="vertical"
+    <android.support.v4.view.ViewPager
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <TextView
-                android:layout_margin="5dp"
-                android:text="ตารางลงรายการบัญชีรายรับ-รายจ่าย"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/header" android:layout_gravity="center|top"
-                android:textSize="20sp" android:textStyle="bold"/>
-        <RelativeLayout
-                android:layout_below="@+id/linear_content"
+            android:layout_height="match_parent" android:id="@+id/manage_viewpager">
+        <android.support.design.widget.TabLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_alignParentStart="true"
-                android:layout_marginStart="8dp" android:layout_alignParentTop="true" android:layout_marginTop="10dp"
-                android:id="@+id/relative_recycle">
-            <TextView
-                    android:text="รายละเอียด"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/detail"
-                    android:layout_alignParentTop="true" android:layout_alignParentStart="true"
-                    android:layout_marginTop="0dp" android:layout_marginStart="30dp" android:textStyle="bold"
-            />
-            <TextView
-                    android:text="จำนวนเงิน"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/amount"
-                    android:layout_alignParentRight="true" android:layout_alignParentTop="true"
-                    android:layout_marginRight="30dp" android:textStyle="bold"
-            />
-        </RelativeLayout>
-        <android.support.v7.widget.RecyclerView
-                android:layout_below="@+id/relative_recycle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" android:id="@+id/table_recycle_view"
-                android:layout_alignParentStart="true" android:layout_alignParentTop="true"
-                android:layout_marginTop="10dp" android:layout_marginStart="4dp" android:layout_alignParentEnd="true"/>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/linear_content">
-        </LinearLayout>
-    </LinearLayout>
+                android:layout_height="wrap_content" android:id="@+id/manage_view"/>
+    </android.support.v4.view.ViewPager>
+    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+        <!--<TextView-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:text="ตารางลงรายการบัญชีรายรับ-รายจ่าย"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" android:id="@+id/header" android:layout_gravity="center|top"-->
+                <!--android:textSize="20sp" android:textStyle="bold"/>-->
+        <!--<RelativeLayout-->
+                <!--android:layout_below="@+id/linear_content"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" android:layout_alignParentStart="true"-->
+                <!--android:layout_marginStart="8dp" android:layout_alignParentTop="true" android:layout_marginTop="10dp"-->
+                <!--android:id="@+id/relative_recycle">-->
+            <!--<TextView-->
+                    <!--android:text="รายละเอียด"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" android:id="@+id/detail"-->
+                    <!--android:layout_alignParentTop="true" android:layout_alignParentStart="true"-->
+                    <!--android:layout_marginTop="0dp" android:layout_marginStart="30dp" android:textStyle="bold"-->
+            <!--/>-->
+            <!--<TextView-->
+                    <!--android:text="จำนวนเงิน"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" android:id="@+id/amount"-->
+                    <!--android:layout_alignParentRight="true" android:layout_alignParentTop="true"-->
+                    <!--android:layout_marginRight="30dp" android:textStyle="bold"-->
+            <!--/>-->
+        <!--</RelativeLayout>-->
+        <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:layout_below="@+id/relative_recycle"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent" android:id="@+id/table_recycle_view"-->
+                <!--android:layout_alignParentStart="true" android:layout_alignParentTop="true"-->
+                <!--android:layout_marginTop="10dp" android:layout_marginStart="4dp" android:layout_alignParentEnd="true"/>-->
+        <!--<LinearLayout-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" android:id="@+id/linear_content">-->
+        <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
 </FrameLayout>

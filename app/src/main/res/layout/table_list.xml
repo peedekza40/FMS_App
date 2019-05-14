@@ -19,7 +19,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginBottom="6dp"
                 android:layout_marginTop="9dp"
-                android:textSize="12sp" android:textColor="@android:color/black"/>
+                android:textSize="12sp"/>
 
         <TextView
                 android:id="@+id/deatail_amount"
@@ -35,7 +35,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="6dp"
                 android:textSize="12sp"
-                android:textColor="@android:color/black"/>
+        />
         <View
                 android:layout_width="400dp"
                 android:layout_height="1dp"

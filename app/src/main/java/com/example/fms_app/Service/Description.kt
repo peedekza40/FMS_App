@@ -39,7 +39,7 @@ class Description (
     }//get_desc_by_desctype
 
     fun get_all_desc(callback: VolleyCallback){
-        url += "/get_all_desc"
+        url += "/Description_service/get_all_desc"
 
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
