@@ -25,9 +25,9 @@ class Add_bank : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar!!.title = "เพิ่มข้อมูลธนาคาร"
         actionBar.setDisplayHomeAsUpEnabled(true)
-        save_btn.setOnClickListener {
-            finish()
-        }
+//        save_btn.setOnClickListener {
+//            finish()
+//        }
         var input_baCode = findViewById<EditText>(R.id.txt_baCode)
         var input_baName = findViewById<EditText>(R.id.txt_baName)
         val serviceBank = Bank(this!!.applicationContext,this!!.cacheDir)
@@ -40,12 +40,13 @@ class Add_bank : AppCompatActivity() {
 
             if (baName != "" && baCode != "") {
                 val jsonBody = JSONObject()
-                jsonBody.put("baCode", baCode)
-                jsonBody.put("baName", baName)
+                jsonBody.put("baCode", input_baCode.text.toString())
+                jsonBody.put("baName", input_baName.text.toString())
                 serviceBank.insert(jsonBody)
-                Toast.makeText(this, "Add Product Success", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Add Bank Success", Toast.LENGTH_SHORT).show()
+                finish()
             } else {
-                Toast.makeText(this, "Can't Add Product", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Can't Add Bank", Toast.LENGTH_SHORT).show()
             }
         }
     }

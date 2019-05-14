@@ -10,12 +10,10 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.Toast
 import com.example.fms_app.Data_class.BacType_data
-import com.example.fms_app.Data_class.BankAccount
 import com.example.fms_app.Data_class.Bank_data
 import com.example.fms_app.R
 import com.example.fms_app.Service.*
 import kotlinx.android.synthetic.main.activity_add_bank_account.*
-import kotlinx.android.synthetic.main.fragment_add_income.*
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -71,7 +69,7 @@ class Add_bankAccount : AppCompatActivity() {
 
         text_baId.setOnItemClickListener(AdapterView.OnItemClickListener { arg0, arg1, arg2, arg3 ->
             val result = arg0.getItemAtPosition(arg2) as Bank_data
-            text_baId.setText(result.baName.toString())//TextView in layout is visible = gone
+            baId.setText(result.baId.toString())//TextView in layout is visible = gone
         })
 
         /*---------------------set bankaccount type dropdown-------------------------*/
@@ -112,52 +110,61 @@ class Add_bankAccount : AppCompatActivity() {
 
         text_batId.setOnItemClickListener(AdapterView.OnItemClickListener { arg0, arg1, arg2, arg3 ->
             val result = arg0.getItemAtPosition(arg2) as BacType_data
-            text_batId.setText(result.batName.toString())//TextView in layout is visible = gone
+            batId.setText(result.batId.toString())//TextView in layout is visible = gone
         })
 
         //---------------------------------- end drop down --------------------------------------------
 
         actionBar.setDisplayHomeAsUpEnabled(true)
-        var input_bacId = findViewById<EditText>(R.id.text_bacId)
-        var input_bacNo = findViewById<EditText>(R.id.text_bacNo)
-        var input_zbank = findViewById<EditText>(R.id.text_Zbank)
-        var input_bacName = findViewById<EditText>(R.id.text_bacName)
-        var input_batId = findViewById<EditText>(R.id.text_batId)
-        var input_baId = findViewById<EditText>(R.id.text_baId)
-        var input_balance = findViewById<EditText>(R.id.text_balance)
         save_btn.setOnClickListener {
-//            if(this.validate()){
-//                val jsonBody = JSONObject()
-//                jsonBody.put("bacId", input_bacId.text.toString())
-//                jsonBody.put("bacNum", input_bacNo.text.toString())
-//                jsonBody.put("ZBANK", input_zbank.text.toString())
-//                jsonBody.put("bacName", input_bacName.text.toString())
-//                jsonBody.put("batId", input_batId.text.toString().toInt())
-//                jsonBody.put("baId", input_baId.text.toString().toInt())
-//                jsonBody.put("bacBalance", input_baId.text.toString().toInt())
-//                service_income.insert(jsonBody)
-//            }else{
-//                Toast.makeText(this, "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show()
-//            }
+            if(this.validate()){
+                val jsonBody = JSONObject()
+                jsonBody.put("bacNum", text_bacnum.text.toString())
+                jsonBody.put("bacNo", text_bacNo.text.toString())
+                jsonBody.put("ZBANK", text_Zbank.text.toString())
+                jsonBody.put("bacName", text_bacName.text.toString())
+                jsonBody.put("batId", batId.text.toString().toInt())
+                jsonBody.put("baId", baId.text.toString().toInt())
+                jsonBody.put("bacBranch", text_bacBranch.text.toString())
+                jsonBody.put("bacBalance", text_balance.text.toString().toInt())
+                service_bankAccount.insert(jsonBody)
+                Toast.makeText(this, "บันทึกข้อมูลสำเร็จ", Toast.LENGTH_SHORT).show()
+                finish()
+            }else{
+                Toast.makeText(this, "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show()
+
+            }
         }
     }
-//    fun validate(): Boolean{
-//        var result: Boolean = true
-//        if(bacText.text.toString() == ""){
-//            bacText.setError( "กรุณาเลือกบัญชีธนาคาร" )
-//            result = false
-//        }
-//        if(amountText.text.toString() == ""){
-//            amountText.setError( "กรุณากรอกจำนวนเงิน" )
-//            result = false
-//        }
-//        if(descText.text.toString() == ""){
-//            descText.setError("กรุณาเลือกคำอธิบาย")
-//            result = false
-//        }
-//
-//        return result
-//    }
+    fun validate(): Boolean{
+        var result: Boolean = true
+        if(text_bacnum.text.toString() == ""){
+            text_bacnum.setError( "กรุณากรอกรหัสบัญชี" )
+            result = false
+        }
+        if(text_bacNo.text.toString() == ""){
+            text_bacNo.setError( "กรุณากรอกเลขที่บัญชี" )
+            result = false
+        }
+        if(text_bacName.text.toString() == ""){
+            text_bacName.setError( "กรุณากรอกชื่อบัญชีธนาคาร" )
+            result = false
+        }
+        if(text_batId.text.toString() == ""){
+            text_batId.setError("กรุณาเลือกชนิดของบัญชีธนาคาร")
+            result = false
+        }
+        if(text_baId.text.toString() == ""){
+            text_baId.setError("กรุณาเลือกบัญชีธนาคาร")
+            result = false
+        }
+        if(text_balance.text.toString() == ""){
+            text_balance.setError("กรุณากรอกยอดยกมา")
+            result = false
+        }
+
+        return result
+    }
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             android.R.id.home -> {
@@ -167,4 +174,5 @@ class Add_bankAccount : AppCompatActivity() {
             else -> return super.onOptionsItemSelected(item)
         }
     }
+
 }
