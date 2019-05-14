@@ -32,6 +32,7 @@ class Manage_income : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_manage_income, container, false)
+
     }
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,11 +48,11 @@ class Manage_income : Fragment() {
 
             override fun onSuccess(result: String) {
                 var json = JSONArray(result)
-                var data_report = get_data_table("",0.00)
+                var data_report = get_data_table_inc("",0.00)
                 val data_table = data_report.mapingData(json)
                 //test_incomedata.text = data_income[0].Code
-                table_recycle_view_inc.layoutManager = LinearLayoutManager(requireActivity())
-                table_recycle_view_inc.adapter = table_Adapter(data_table)
+                table_recycle_view_inc.layoutManager = LinearLayoutManager(activity)
+                table_recycle_view_inc.adapter = table_Adapter_inc(data_table)
                 //val inc_code = JSONArray(result).getJSONObject(0).getString("inc_code")
             }
         })
