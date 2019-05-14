@@ -25,7 +25,7 @@
                 <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="รหัสบัญชี" android:id="@+id/text_bacId" android:inputType="number"/>
+                        android:hint="รหัสบัญชี" android:id="@+id/text_bacnum" android:inputType="number"/>
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -80,6 +80,15 @@
                 <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="สาขา" android:inputType="text" android:id="@+id/text_bacBranch"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:hint="ยอดยกมา" android:id="@+id/text_balance" android:inputType="number"/>
             </android.support.design.widget.TextInputLayout>
             <Button
@@ -88,6 +97,14 @@
                     android:layout_height="50dp" android:id="@+id/save_btn" android:backgroundTint="#5CAF5E"
                     android:textColor="#FFFFFF" android:textSize="18sp" android:textStyle="bold"
                     android:layout_marginTop="15dp"/>
+            <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/batId" android:visibility="gone"/>
+            <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/baId" android:visibility="gone"/>
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

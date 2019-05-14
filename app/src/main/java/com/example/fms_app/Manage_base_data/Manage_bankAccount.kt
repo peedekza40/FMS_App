@@ -50,7 +50,6 @@ class Manage_bankAccount : Fragment() {
                 val bac_frm_svc = JSONArray(result)
                 var data_bac = BankAccount_data(0, "", "", "", "", "", "", 0, 0, "")
                 val bac_data = data_bac.mappingData(bac_frm_svc)
-//                val bac = ArrayList<BankAccount>()
                 bac_recycler.layoutManager = LinearLayoutManager(requireActivity())
                 bac_recycler.adapter = BankAccountListAdapter(bac_data)
                 bac_recycler.addOnScrollListener(object : RecyclerView.OnScrollListener(){
@@ -74,48 +73,14 @@ class Manage_bankAccount : Fragment() {
                 })
             }
         })
-//        ------------------------------- mocky -----------------------------------
-//        val url = "http://www.mocky.io/v2/5cd9d306300000b821c0185a"
-//        val stringRequest = serviceDataUTF8Encoding(Request.Method.GET,url,
-//            Response.Listener<String> { response ->
-//                try{
-//                    var json = JSONArray(response)
-//                    var data_bac = BankAccount_data("","","","","","")
-//                    val bac_data = data_bac.mappingData(json)
-//                    bac_recycler.layoutManager = LinearLayoutManager(requireActivity())
-//                    bac_recycler.adapter = BankAccountListAdapter(bac_data)
-//                }catch (err : JSONException){
-//
-//                }
-//            }
-//            ,Response.ErrorListener { Toast.makeText(activity,"error",Toast.LENGTH_SHORT).show() })
-//        stringRequest.tag = TAG
-//        requestQueue?.add(stringRequest)
 
         val fab_add = getView()?.findViewById<FloatingActionButton>(R.id.add_bac_btn)
-//        val pencil_btn = getView()?.findViewById<ImageButton>(R.id.pen_bac_btn)
 
         fab_add?.setOnClickListener {
             var intent = Intent(activity, Add_bankAccount::class.java)
             startActivity(intent)
         }
 
-//        pencil_btn?.setOnClickListener {
-//            var intent = Intent(activity,Edit_bankaccount::class.java)
-//            startActivity(intent)
-//        }
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-//
-//        return when (item!!.itemId) {
-//            R.id.pen_bac_btn -> {
-//                //Toast.makeText(this, "Success!!", Toast.LENGTH_SHORT).show()
-//                val intent = Intent(activity, Edit_bankaccount::class.java)
-//                startActivity(intent)
-//                true
-//            }
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
 }
