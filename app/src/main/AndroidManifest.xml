@@ -44,6 +44,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".Report.Report_Filter_income"></activity>
+        <activity android:name=".Report.Report_Filter_payment"></activity>
     </application>
 
 </manifest>

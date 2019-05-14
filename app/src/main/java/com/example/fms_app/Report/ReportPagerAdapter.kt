@@ -3,6 +3,7 @@ package com.example.fms_app.Report
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import com.example.fms_app.Report_payment
 
 class ReportPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm){
 
