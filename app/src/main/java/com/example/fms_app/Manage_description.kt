@@ -15,6 +15,7 @@ import com.example.fms_app.Service.VolleyCallback
 import kotlinx.android.synthetic.main.fragment_manage_bank_account.*
 import kotlinx.android.synthetic.main.fragment_manage_description.*
 import org.json.JSONArray
+import org.json.JSONObject
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -45,6 +46,10 @@ class Manage_description : Fragment() {
         val service_desc = Description(activity!!.applicationContext, activity!!.cacheDir)
         /*----------------------get all description------------------------------------*/
         service_desc.get_all_desc(object : VolleyCallback {
+            override fun onSuccess(result: JSONObject) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
             override fun onSuccess(result: String) {
                 val desc_frm_srv = JSONArray(result)
                 var data_desc = Description_data("","",0)

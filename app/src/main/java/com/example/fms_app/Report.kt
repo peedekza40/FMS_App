@@ -10,10 +10,13 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.ViewPager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_report.*
+import kotlinx.android.synthetic.main.fragment_report_income.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -62,6 +65,7 @@ class Report : Fragment() {
         val tabLayout: TabLayout = Report_tabbar
         viewPager.adapter = ReportPagerAdapter(childFragmentManager)
         tabLayout.setupWithViewPager(viewPager)
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -82,6 +86,8 @@ class Report : Fragment() {
         super.onDetach()
         listener = null
     }
+
+
 
 
     /**
