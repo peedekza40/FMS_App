@@ -3,6 +3,7 @@ package com.example.fms_app.Service
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -59,17 +60,33 @@ class Description (
 
     fun insert(jsonBody: JSONObject){
         url = ip
-        url += "/insert_desc"
+        url += "/Description_service/insert_desc"
         // Request a string response from the provided URL.
-        val objectRequest = JsonObjectRequest(
-            Request.Method.POST, url,jsonBody,
-            Response.Listener<JSONObject> {response ->
+        val stringRequest = object : StringRequest(
+            Request.Method.POST, url,
+            Response.Listener<String> {response ->
+                println("${response}")
+                Toast.makeText(context, "${response}", Toast.LENGTH_SHORT).show()
             },
             Response.ErrorListener {
-                    response-> Toast.makeText(context, "${response}", Toast.LENGTH_SHORT).show()
-            }
-        )
-        requestQueue?.add(objectRequest)
+                    response->
+                    Toast.makeText(context, "${response}", Toast.LENGTH_SHORT).show()
+            }) {
+                override fun getBodyContentType(): String {
+                    return "application/x-www-form-urlencoded; charset=UTF-8";
+                }//getBodyContentType
+
+                @Throws(AuthFailureError::class)
+                override fun getParams(): Map<String, String> {
+                    val params = HashMap<String, String>()
+                    params["desc_desid"] = jsonBody.getString("desc_desid")
+                    params["desc_description"] = jsonBody.getString("desc_description")
+                    params["desc_type"] = jsonBody.getInt("desc_type").toString()
+                    params["ac_statusstat_id"] = jsonBody.getInt("ac_statusstat_id").toString()
+                    return params
+                }//getParams
+        }
+        requestQueue?.add(stringRequest)
     }//insert
 
     fun cancleRequest(){
