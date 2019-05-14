@@ -84,23 +84,5 @@ class Manage_bank : Fragment() {
             var intent = Intent(activity, Add_bank::class.java)
             startActivity(intent)
         }
-
-//        pencil_btn?.setOnClickListener {
-//            var intent = Intent(activity,Edit_bankaccount::class.java)
-//            startActivity(intent)
-//        }
     }
-
-//    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-//
-//        return when (item!!.itemId) {
-//            R.id.pen_bac_btn -> {
-//                //Toast.makeText(this, "Success!!", Toast.LENGTH_SHORT).show()
-//                val intent = Intent(activity, Edit_bankaccount::class.java)
-//                startActivity(intent)
-//                true
-//            }
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
 }
