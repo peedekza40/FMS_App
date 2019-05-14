@@ -4,7 +4,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:orientation="vertical"
-             tools:context=".Report_income">
+             tools:context=".Report.Report_income">
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/test_paymentdata"/>

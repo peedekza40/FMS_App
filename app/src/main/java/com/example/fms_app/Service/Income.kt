@@ -29,7 +29,7 @@ class Income(
 
     fun get_all(callback: VolleyCallback){
         url = ip
-        url += "/get_all_income"
+        url += "Income_service/get_all_income"
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
             Request.Method.GET, url,
@@ -48,7 +48,7 @@ class Income(
 
     fun get_last_inc_code(callback: VolleyCallback){
         url = ip
-        url += "/get_last_inc_code"
+        url += "Income_service/get_last_inc_code"
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
             Request.Method.GET, url,
@@ -66,7 +66,7 @@ class Income(
 
     fun insert(jsonBody: JSONObject){
         url = ip
-        url += "/insert_income"
+        url += "Income_service/insert_income"
         // Request a string response from the provided URL.
         val objectRequest = JsonObjectRequest(
             Request.Method.POST, url,jsonBody,
@@ -88,7 +88,7 @@ class Income(
 
     fun get_all_rangedate_bacid(date_start:String?,date_end: String?,bacId: String?,callback: VolleyCallback){
         url = ip
-        url += "/get_income_by_rangedate_and_bac/${bacId}/${date_start}/${date_end}"
+        url += "Income_service/get_by_rangedate_and_bac?startDate=${date_start}&endDate=${date_end}&bacId=${bacId}"
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
             Request.Method.GET, url,
