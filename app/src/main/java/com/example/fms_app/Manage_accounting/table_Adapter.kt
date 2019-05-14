@@ -41,9 +41,9 @@ class ViewHolder(inflater: LayoutInflater, parent: ViewGroup)
     }
 
     fun binding(get_data_table: get_data_table){
-        detail_table?.text = get_data_table.Detail
+        detail_table?.text = get_data_table.desc_description
 
-        deatail_amount?.text = get_data_table.Amount.toString()
+        deatail_amount?.text = get_data_table.inc_amount.toString()
     }
 
 }

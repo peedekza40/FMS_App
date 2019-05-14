@@ -2,20 +2,14 @@ package com.example.fms_app.Manage_accounting
 
 import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.Volley
 import com.example.fms_app.R
-import com.example.fms_app.Service.serviceDataUTF8Encoding
 import kotlinx.android.synthetic.main.fragment_manage_ac.*
-import org.json.JSONArray
-import org.json.JSONException
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,29 +69,37 @@ class Manage_ac : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val requestQueue = Volley.newRequestQueue(requireActivity())
-        val url = "http://www.mocky.io/v2/5cd9b5aa3000006621c017cd"
-        val stringRequest = serviceDataUTF8Encoding(Request.Method.GET, url,
-            Response.Listener<String> { response ->
-                try {
-                    var json = JSONArray(response)
-                    var data_report = get_data_table("", 0.0)
-                    val data_table = data_report.mapingData(json)
-                    //test_incomedata.text = data_income[0].Code
-                    table_recycle_view.layoutManager = LinearLayoutManager(requireActivity())
-                    table_recycle_view.adapter = table_Adapter(data_table)
-                } catch (e: JSONException) {
-                    //  test_incomedata.text = e.message
-                }
-
-            },
-            Response.ErrorListener { Toast.makeText(activity, "error", Toast.LENGTH_LONG).show() })
-
-        stringRequest.tag = this.TAG
-        requestQueue?.add(stringRequest)
-
+        val viewPager: ViewPager = manage_viewpager
+        val tabLayout: TabLayout = manage_view
+        viewPager.adapter = ManageDataPagerAdapter(childFragmentManager)
+        tabLayout.setupWithViewPager(viewPager)
     }
+
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+
+//       val object_ma: Income = Income(activity!!,cacheDir = activity!!.cacheDir)
+//       // val object_des: Description = Description(activity!!,cacheDir = activity!!.cacheDir)
+//        /*----------------------get_all_income------------------------------------*/
+//        object_ma.get_all(object : VolleyCallback {
+//            override fun onSuccess(result: JSONObject) {
+//
+//            }
+//
+//            override fun onSuccess(result: String) {
+//                var json = JSONArray(result)
+//                var data_report = get_data_table("",0.00)
+//                val data_table = data_report.mapingData(json)
+//                //test_incomedata.text = data_income[0].Code
+//                table_recycle_view.layoutManager = LinearLayoutManager(requireActivity())
+//                table_recycle_view.adapter = table_Adapter(data_table)
+//                //val inc_code = JSONArray(result).getJSONObject(0).getString("inc_code")
+//            }
+//        })
+//
+
+
+ //   }
 
 
 
@@ -138,3 +140,4 @@ class Manage_ac : Fragment() {
             }
     }
 }
+
