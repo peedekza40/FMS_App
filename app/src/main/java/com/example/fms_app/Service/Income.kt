@@ -71,18 +71,13 @@ class Income(
         val objectRequest = JsonObjectRequest(
             Request.Method.POST, url,jsonBody,
             Response.Listener<JSONObject> {response ->
+
             },
             Response.ErrorListener {
                     response-> Toast.makeText(context, "${response}", Toast.LENGTH_SHORT).show()
             }
         )
-        objectRequest.setRetryPolicy(
-                DefaultRetryPolicy(
-                    0,
-                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-                )
-        )
+
         requestQueue?.add(objectRequest)
     }
 
