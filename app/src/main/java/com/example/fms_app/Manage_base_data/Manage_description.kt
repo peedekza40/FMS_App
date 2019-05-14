@@ -53,7 +53,7 @@ class Manage_description : Fragment() {
 
             override fun onSuccess(result: String) {
                 val desc_frm_srv = JSONArray(result)
-                var data_desc = Description_data("", "", 0)
+                var data_desc = Description_data("", "", 1)
                 val desc_data = data_desc.mappingData(desc_frm_srv)
                 desc_recycler.layoutManager = LinearLayoutManager(requireActivity())
                 desc_recycler.adapter = DescriptionListAdapter(desc_data)
@@ -77,25 +77,6 @@ class Manage_description : Fragment() {
                 })
             }//onSuccess
         })
-
-        /*----------------------Mock Data------------------------------------*/
-        /*val requestQueue = Volley.newRequestQueue(requireActivity())
-        val url = "http://www.mocky.io/v2/5cd9a90b3000006621c01780"
-        val stringRequest = serviceDataUTF8Encoding(Request.Method.GET,url,
-            Response.Listener<String> { response ->
-                try{
-                    var json = JSONArray(response)
-                    var data_desc = Description_data("","",0)
-                    val desc_data = data_desc.mappingData(json)
-                    desc_recycler.layoutManager = LinearLayoutManager(requireActivity())
-                    desc_recycler.adapter = DescriptionListAdapter(desc_data)
-                }catch (err : JSONException){
-
-                }
-            }
-            , Response.ErrorListener { Toast.makeText(activity,"error", Toast.LENGTH_SHORT).show() })
-        stringRequest.tag = TAG
-        requestQueue?.add(stringRequest)*/
         val fab_add = getView()?.findViewById<FloatingActionButton>(R.id.add_desc_btn)
 
         fab_add?.setOnClickListener {

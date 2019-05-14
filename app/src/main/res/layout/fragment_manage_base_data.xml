@@ -11,6 +11,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/BaseData_tabbar"
                 app:tabIndicatorColor="@color/colorAccent" app:tabBackground="@color/colorPrimary"
-                app:tabTextColor="@color/cardview_light_background" app:tabIndicatorHeight="4dp"/>
+                app:tabTextColor="@color/cardview_light_background" app:tabIndicatorHeight="4dp"
+                app:tabSelectedTextColor="@color/colorAccent"/>
     </android.support.v4.view.ViewPager>
 </FrameLayout>
