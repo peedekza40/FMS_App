@@ -2,6 +2,7 @@ package com.example.fms_app.Service
 
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -55,6 +56,21 @@ class Description (
         // Add the request to the RequestQueue.
         requestQueue?.add(stringRequest)
     }//get_all_desc
+
+    fun insert(jsonBody: JSONObject){
+        url = ip
+        url += "/insert_desc"
+        // Request a string response from the provided URL.
+        val objectRequest = JsonObjectRequest(
+            Request.Method.POST, url,jsonBody,
+            Response.Listener<JSONObject> {response ->
+            },
+            Response.ErrorListener {
+                    response-> Toast.makeText(context, "${response}", Toast.LENGTH_SHORT).show()
+            }
+        )
+        requestQueue?.add(objectRequest)
+    }//insert
 
     fun cancleRequest(){
         requestQueue?.cancelAll(TAG)

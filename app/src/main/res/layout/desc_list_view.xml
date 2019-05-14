@@ -14,7 +14,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="descId" android:layout_marginTop="15dp" android:layout_marginEnd="35dp"
-                android:textSize="16sp"
+                android:textStyle="bold" android:textSize="16sp"
                 android:layout_marginStart="21dp" android:layout_marginBottom="15dp"/>
         <TextView
                 android:id="@+id/descName"
@@ -24,7 +24,7 @@
                 tools:text="descName"
                 android:layout_marginTop="15dp" android:textSize="16sp"
                 android:layout_marginStart="21dp" android:layout_marginEnd="21dp"
-        android:layout_marginBottom="15dp"/>
+                android:layout_marginBottom="15dp"/>
 
         <View
                 android:layout_width="400dp"

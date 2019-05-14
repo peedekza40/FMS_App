@@ -5,7 +5,13 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.example.fms_app.R
+import com.example.fms_app.Service.Bank_account
+import com.example.fms_app.Service.Description
+import com.example.fms_app.Service.TransformDate
+import kotlinx.android.synthetic.main.fragment_add_income.*
+import org.json.JSONObject
 
 class Add_description : AppCompatActivity() {
 
@@ -38,6 +44,31 @@ class Add_description : AppCompatActivity() {
     }//onOptionsItemSelected
 
     private fun insert_desc(){
-        finish()
+        val service_desc = Description(this, cacheDir)
+        if(this.validate()){
+            val jsonBody = JSONObject()
+            jsonBody.put("desc_desid", txt_descId?.text.toString())
+            jsonBody.put("desc_description", txt_descName?.text.toString())
+            jsonBody.put("desc_type", 2)
+            jsonBody.put("ac_statusstat_id", 1)
+            service_desc.insert(jsonBody)
+            finish()
+        }else{
+            Toast.makeText(this, "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show()
+        }
     }//insert_desc
+
+    fun validate(): Boolean{
+        val service_desc = Description(this, cacheDir)
+        var result: Boolean = true
+        if(txt_descId?.text.toString() == ""){
+            txt_descId?.setError( "กรุณากรอกเลขคำอธิบายรายการบัญชี" )
+            result = false
+        }
+        if(txt_descName?.text.toString() == ""){
+            txt_descName?.setError( "กรุณากรอกคำอธิบายรายการบัญชี" )
+            result = false
+        }
+        return result
+    }
 }
