@@ -12,7 +12,7 @@ class Bank(
     val cacheDir: File): Conifg_service(context, cacheDir) {
 
     fun get_bank(callback: VolleyCallback){
-        url += "/get_bank"
+        url += "/Bank_service/get_bank"
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
             Request.Method.GET, url,

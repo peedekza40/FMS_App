@@ -28,13 +28,13 @@ class BaseDataPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getPageTitle(position: Int): CharSequence? {
         when(position){
             0 -> {
-                return "Bank"
+                return "ธนาคาร"
             }
             1 -> {
-                return "Bank Account"
+                return "บัญชีธนาคาร"
             }
             2 -> {
-                return "Description"
+                return "คำอธิบายรายการ"
             }
         }
         return null
