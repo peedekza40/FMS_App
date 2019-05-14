@@ -2,14 +2,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
-             android:layout_height="match_parent"
+             android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
              tools:context=".Manage_accounting.Manage_ac">
     <android.support.v4.view.ViewPager
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/manage_viewpager">
         <android.support.design.widget.TabLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/manage_view"/>
+                android:layout_height="wrap_content" android:id="@+id/manage_view"
+                app:tabTextColor="@color/white" app:tabBackground="@color/colorPrimary"
+        app:tabSelectedTextColor="@color/colorAccent" app:tabIndicatorColor="@color/colorAccent"
+        app:tabIndicatorHeight="4dp"/>
     </android.support.v4.view.ViewPager>
     <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
             <!--android:orientation="vertical"-->

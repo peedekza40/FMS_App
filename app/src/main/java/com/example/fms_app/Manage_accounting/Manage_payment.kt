@@ -41,7 +41,7 @@ class Manage_payment : Fragment() {
 
         val object_ma_pay: Payment = Payment(activity!!,cacheDir = activity!!.cacheDir)
 
-        /*----------------------get_all_income------------------------------------*/
+        /*----------------------get_all_payment ------------------------------------*/
         object_ma_pay.get_all(object : VolleyCallback {
             override fun onSuccess(result: JSONObject) {
 
