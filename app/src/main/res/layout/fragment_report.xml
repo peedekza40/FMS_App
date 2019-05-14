@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".Report">
+             android:orientation="vertical"
+             tools:context=".Report.Report">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v4.view.ViewPager
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="รายงานรายการบัญชี" android:textSize="24sp"/>
+            android:layout_height="wrap_content" android:id="@+id/Report_viewpager">
+        <android.support.design.widget.TabLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/Report_tabbar"
+                app:tabIndicatorColor="@color/colorAccent" app:tabBackground="@color/colorPrimary">
+        </android.support.design.widget.TabLayout>
 
-</FrameLayout>
+    </android.support.v4.view.ViewPager>
+
+
+</RelativeLayout>

@@ -14,8 +14,32 @@ class Description (
     val context: Context,
     val cacheDir: File) : Conifg_service(context, cacheDir){
 
+    init {
+    }
+
+    val TAG = "Service desc"
+
     fun get_desc_by_desctype(desctype : Int, callback: VolleyCallback){
+        url = ip
         url += "/get_desc_by_desctype/" + desctype
+
+        // Request a string response from the provided URL.
+        val stringRequest = StringRequest(
+            Request.Method.GET, url,
+            Response.Listener<String> { response ->
+                callback.onSuccess(response)
+            },
+            Response.ErrorListener {
+                    response-> Log.d("Service error",response.toString())
+            }
+        )
+        stringRequest.tag = TAG
+        // Add the request to the RequestQueue.
+        requestQueue?.add(stringRequest)
+    }//get_desc_by_desctype
+
+    fun get_all_desc(callback: VolleyCallback){
+        url += "/get_all_desc"
 
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
@@ -30,6 +54,10 @@ class Description (
         stringRequest.tag = "Service FMS"
         // Add the request to the RequestQueue.
         requestQueue?.add(stringRequest)
+    }//get_all_desc
+
+    fun cancleRequest(){
+        requestQueue?.cancelAll(TAG)
     }
 
 }

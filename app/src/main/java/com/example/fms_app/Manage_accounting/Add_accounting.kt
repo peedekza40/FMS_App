@@ -1,27 +1,13 @@
-package com.example.fms_app
+package com.example.fms_app.Manage_accounting
 
-import android.app.Activity
-import android.app.Service
-import android.content.Intent
-import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.RequiresApi
-import android.support.v4.app.NavUtils
 import android.view.MenuItem
-import com.android.volley.Request
 import com.android.volley.RequestQueue
-import com.android.volley.Response
-import com.android.volley.toolbox.*
-import com.example.fms_app.Service.Income
-import com.example.fms_app.Service.VolleyCallback
-import org.json.JSONArray
-import kotlinx.android.synthetic.main.activity_add_accounting.*
 import android.support.v4.view.ViewPager
 import android.support.design.widget.TabLayout
-import android.widget.EditText
-import android.widget.Toast
-import kotlinx.android.synthetic.main.fragment_add_income.*
+import com.example.fms_app.R
+import com.example.fms_app.Adapter_center.TabAdapter
 
 
 class Add_accounting : AppCompatActivity() {

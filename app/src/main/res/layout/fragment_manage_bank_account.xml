@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+             tools:context=".Manage_base_data.Manage_bankAccount">
+
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:text="รายการบัญชีเงินฝาก"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/textDesc" android:textSize="18sp"
+                    android:textStyle="bold" android:textAlignment="center" android:layout_marginTop="15dp"
+                    android:layout_marginBottom="25dp"
+            />
+            <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/bac_recycler">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+        <android.support.design.widget.FloatingActionButton
+                android:src="@drawable/ic_add_black_24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true" android:id="@+id/add_bac_btn" android:backgroundTint="#2196F3"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="32dp" android:layout_marginEnd="32dp"
+                app:fabSize="auto"/>
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>

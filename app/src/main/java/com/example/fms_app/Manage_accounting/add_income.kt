@@ -1,4 +1,4 @@
-package com.example.fms_app
+package com.example.fms_app.Manage_accounting
 
 import android.net.Uri
 import android.os.Bundle
@@ -9,15 +9,12 @@ import android.view.ViewGroup
 import android.widget.EditText
 import kotlinx.android.synthetic.main.fragment_add_income.*
 import java.util.*
-import android.widget.DatePicker
 import android.app.DatePickerDialog
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.text.Editable
-import android.widget.AdapterView
 import android.widget.Toast
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import android.widget.AdapterView.OnItemClickListener
 import com.example.fms_app.Data_class.BankAccount
 import com.example.fms_app.Data_class.Desc
@@ -28,6 +25,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.collections.ArrayList
 import android.text.TextWatcher
+import com.example.fms_app.R
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -77,11 +75,16 @@ class add_income : Fragment(){
         val service_income = Income(activity!!.applicationContext,activity!!.cacheDir)
         val service_bankACC = Bank_account(activity!!.applicationContext, activity!!.cacheDir)
         val service_desc = Description(activity!!.applicationContext, activity!!.cacheDir)
+        //Data class
 
 
 
         /*----------------------set inc_code------------------------------------*/
         service_income.get_last_inc_code(object : VolleyCallback {
+            override fun onSuccess(result: JSONObject) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
             override fun onSuccess(result: String) {
                 val last_code = JSONArray(result).getJSONObject(0).getString("inc_code")
                 codeText.setText(gen_inc_code(last_code))
@@ -106,6 +109,10 @@ class add_income : Fragment(){
         })
 
         service_bankACC.get_bankAccount(object : VolleyCallback {
+            override fun onSuccess(result: JSONObject) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
             override fun onSuccess(result: String) {
                 val bac_frm_svc = JSONArray(result)
 
@@ -129,9 +136,10 @@ class add_income : Fragment(){
         bacText.setOnClickListener {
             bacText.showDropDown()
         }
+
+        var obj: BankAccount? = null
         bacText.setOnItemClickListener(OnItemClickListener { arg0, arg1, arg2, arg3->
             val result = arg0.getItemAtPosition(arg2) as BankAccount
-            result.bacId
             bacId.setText(result.bacId.toString())//TextView in layout is visible = gone
         })
 
@@ -150,6 +158,10 @@ class add_income : Fragment(){
         })
 
         service_desc.get_desc_by_desctype(1, object : VolleyCallback {
+            override fun onSuccess(result: JSONObject) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
             override fun onSuccess(result: String) {
                 val desc_frm_srv = JSONArray(result)
                 val desc = ArrayList<Desc>()
@@ -175,7 +187,6 @@ class add_income : Fragment(){
         }
         descText.setOnItemClickListener(OnItemClickListener { arg0, arg1, arg2, arg3->
             val result = arg0.getItemAtPosition(arg2) as Desc
-            result.desc_id
             descId.setText(result.desc_id.toString())//TextView in layout is visible = gone
         })
 
@@ -184,7 +195,19 @@ class add_income : Fragment(){
         /*---------------------click save-------------------------*/
         saveBtn.setOnClickListener {
             if(this.validate()){
-
+                val jsonBody = JSONObject()
+                jsonBody.put("inc_code", codeText.text.toString())
+                jsonBody.put("inc_date", TransformDate(dateText.text.toString()).getDateforDb_1())
+                jsonBody.put("inc_receipt", receiptText.text.toString())
+                jsonBody.put("inc_receipt_code", receiptCodeText.text.toString())
+                jsonBody.put("inc_receipt_date", TransformDate(receiptDateText.text.toString()).getDateforDb_1())
+                jsonBody.put("inc_amount", amountText.text.toString().toDouble())
+                jsonBody.put("inc_detail", "")
+                jsonBody.put("inc_desc_id", descId.text.toString().toInt())
+                jsonBody.put("inc_bac_id", bacId.text.toString().toInt())
+                jsonBody.put("inc_status", "Y")
+                jsonBody.put("inc_editor", 2)
+                service_income.insert(jsonBody)
             }else{
                 Toast.makeText(activity, "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show()
             }
@@ -192,12 +215,13 @@ class add_income : Fragment(){
     }
 
     fun validate(): Boolean{
+        val service_bankACC = Bank_account(activity!!.applicationContext, activity!!.cacheDir)
         var result: Boolean = true
         if(bacText.text.toString() == ""){
             bacText.setError( "กรุณาเลือกบัญชีธนาคาร" )
             result = false
         }
-        if( amountText.text.toString() == "" ){
+        if(amountText.text.toString() == ""){
             amountText.setError( "กรุณากรอกจำนวนเงิน" )
             result = false
         }
@@ -205,6 +229,7 @@ class add_income : Fragment(){
             descText.setError("กรุณาเลือกคำอธิบาย")
             result = false
         }
+
         return result
     }
 
@@ -273,6 +298,9 @@ class add_income : Fragment(){
     override fun onDetach() {
         super.onDetach()
         listener = null
+        Income(activity!!, activity!!.cacheDir).cancleRequest()
+        Description(activity!!, activity!!.cacheDir).cancleRequest()
+        Bank_account(activity!!, activity!!.cacheDir).cancleRequest()
     }
 
     /**

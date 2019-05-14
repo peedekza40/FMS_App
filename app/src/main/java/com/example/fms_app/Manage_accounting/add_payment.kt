@@ -1,12 +1,12 @@
-package com.example.fms_app
+package com.example.fms_app.Manage_accounting
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.fms_app.R
 
 
 // TODO: Rename parameter arguments, choose names that match

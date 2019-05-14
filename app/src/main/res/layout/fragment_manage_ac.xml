@@ -3,7 +3,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".Manage_ac">
+             tools:context=".Manage_accounting.Manage_ac">
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -13,7 +13,7 @@
                 android:text="ตารางลงรายการบัญชีรายรับ-รายจ่าย"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/header" android:layout_gravity="center|top"
-                android:textSize="20sp" android:textColor="@android:color/black"/>
+                android:textSize="20sp" android:textStyle="bold"/>
         <RelativeLayout
                 android:layout_below="@+id/linear_content"
                 android:layout_width="match_parent"
@@ -26,14 +26,14 @@
                     android:layout_height="wrap_content" android:id="@+id/detail"
                     android:layout_alignParentTop="true" android:layout_alignParentStart="true"
                     android:layout_marginTop="0dp" android:layout_marginStart="30dp" android:textStyle="bold"
-                    android:textColor="@android:color/black"/>
+            />
             <TextView
                     android:text="จำนวนเงิน"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/amount"
                     android:layout_alignParentRight="true" android:layout_alignParentTop="true"
                     android:layout_marginRight="30dp" android:textStyle="bold"
-                    android:textColor="@android:color/black"/>
+            />
         </RelativeLayout>
         <android.support.v7.widget.RecyclerView
                 android:layout_below="@+id/relative_recycle"

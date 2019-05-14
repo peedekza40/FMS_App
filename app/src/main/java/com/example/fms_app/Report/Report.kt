@@ -1,12 +1,15 @@
-package com.example.fms_app
+package com.example.fms_app.Report
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.fms_app.R
+import kotlinx.android.synthetic.main.fragment_report.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -29,13 +32,15 @@ class Report : Fragment() {
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        //code here .....
+
+
     }
 
     override fun onCreateView(
@@ -43,7 +48,17 @@ class Report : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_report, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_report, container, false)
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val viewPager: ViewPager = Report_viewpager
+        val tabLayout: TabLayout = Report_tabbar
+        viewPager.adapter = ReportPagerAdapter(childFragmentManager)
+        tabLayout.setupWithViewPager(viewPager)
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -64,6 +79,9 @@ class Report : Fragment() {
         super.onDetach()
         listener = null
     }
+
+
+
 
     /**
      * This interface must be implemented by activities that contain this
@@ -100,4 +118,6 @@ class Report : Fragment() {
                 }
             }
     }
+
+
 }

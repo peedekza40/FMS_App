@@ -1,24 +1,15 @@
-package com.example.fms_app
+package com.example.fms_app.Manage_base_data
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.Volley
-import com.example.fms_app.Service.Income
-import com.example.fms_app.Service.VolleyCallback
-import kotlinx.android.synthetic.main.fragment_add_income.*
-import kotlinx.android.synthetic.main.fragment_manage_ac.*
-import org.json.JSONArray
-import org.json.JSONException
-import java.io.UnsupportedEncodingException
+import com.example.fms_app.R
+import kotlinx.android.synthetic.main.fragment_manage_base_data.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,18 +19,18 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [Manage_ac.OnFragmentInteractionListener] interface
+ * [Manage_base_data.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [Manage_ac.newInstance] factory method to
+ * Use the [Manage_base_data.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class Manage_ac : Fragment() {
+class Manage_base_data : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var listener: OnFragmentInteractionListener? = null
-    private val TAG = "SERVICE_Report"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -54,7 +45,16 @@ class Manage_ac : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_manage_ac, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_manage_base_data, container, false)
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val viewPager: ViewPager = BaseData_viewpager
+        val tabLayout: TabLayout = BaseData_tabbar
+        viewPager.adapter = BaseDataPagerAdapter(childFragmentManager)
+        tabLayout.setupWithViewPager(viewPager)
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -75,50 +75,6 @@ class Manage_ac : Fragment() {
         super.onDetach()
         listener = null
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val object_ma:Income = Income(activity!!,cacheDir = activity!!.cacheDir)
-
-        /*----------------------get_all_income------------------------------------*/
-        object_ma.get_all(object : VolleyCallback {
-            override fun onSuccess(result: String) {
-                var json = JSONArray(result)
-                    var data_report = get_data_table("",0.00)
-                    val data_table = data_report.mapingData(json)
-                    //test_incomedata.text = data_income[0].Code
-                    table_recycle_view.layoutManager = LinearLayoutManager(requireActivity())
-                    table_recycle_view.adapter = table_Adapter(data_table)
-                //val inc_code = JSONArray(result).getJSONObject(0).getString("inc_code")
-            }
-        })
-
-//              val requestQueue = Volley.newRequestQueue(requireActivity())
-//        val url = "http://www.mocky.io/v2/5cd9b5aa3000006621c017cd"
-//        val stringRequest = serviceDataUTF8Encoding( Request.Method.GET, url,
-//            Response.Listener<String> { response ->
-//                try {
-//                    var json = JSONArray(response)
-//                    var data_report = get_data_table("",0.0)
-//                    val data_table = data_report.mapingData(json)
-//                    //test_incomedata.text = data_income[0].Code
-//                    table_recycle_view.layoutManager = LinearLayoutManager(requireActivity())
-//                    table_recycle_view.adapter = table_Adapter(data_table)
-//                }catch(e: JSONException){
-//                  //  test_incomedata.text = e.message
-//                }
-//
-//            },
-//            Response.ErrorListener { Toast.makeText(activity, "error",Toast.LENGTH_LONG).show() })
-//
-//        stringRequest.tag = this.TAG
-//        requestQueue?.add(stringRequest)
-//
-    }
-
-
-
 
     /**
      * This interface must be implemented by activities that contain this
@@ -143,12 +99,12 @@ class Manage_ac : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Manage_ac.
+         * @return A new instance of fragment Manage_base_data.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Manage_ac().apply {
+            Manage_base_data().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

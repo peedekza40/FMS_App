@@ -1,9 +1,10 @@
-package com.example.fms_app
+package com.example.fms_app.Manage_accounting
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.fms_app.R
 import kotlinx.android.synthetic.main.table_list.view.*
 
 class table_Adapter (val datasource: ArrayList<get_data_table>) : RecyclerView.Adapter<ViewHolder>(){
