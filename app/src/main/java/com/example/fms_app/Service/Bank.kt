@@ -3,6 +3,7 @@ package com.example.fms_app.Service
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import com.android.volley.AuthFailureError
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.Response
@@ -34,23 +35,29 @@ class Bank(
 
     fun insert(jsonBody: JSONObject){
         url = ip
-        url += "Bank_service/insert"
+        url += "/Bank_service/insert"
         // Request a string response from the provided URL.
-        val objectRequest = JsonObjectRequest(
-            Request.Method.POST, url,jsonBody,
-            Response.Listener<JSONObject> { response ->
+        val stringRequest = object : StringRequest(
+            Request.Method.POST, url,
+            Response.Listener<String> {response ->
+                Toast.makeText(context, "${response}", Toast.LENGTH_SHORT).show()
+                println("${response}")
             },
             Response.ErrorListener {
                     response-> Toast.makeText(context, "${response}", Toast.LENGTH_SHORT).show()
+            }){
+            override fun getBodyContentType(): String {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
             }
-        )
-        objectRequest.setRetryPolicy(
-            DefaultRetryPolicy(
-                0,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-            )
-        )
-        requestQueue?.add(objectRequest)
+
+            @Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+                val params = HashMap<String, String>()
+                params["baCode"] = jsonBody.getString("baCode")
+                params["baName"] = jsonBody.getString("baName")
+                return params
+            }
+        }
+        requestQueue?.add(stringRequest)
     }
 }
