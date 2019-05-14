@@ -36,29 +36,29 @@ class Manage_payment : Fragment() {
         return inflater.inflate(R.layout.fragment_manage_payment2, container, false)
     }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-////        super.onViewCreated(view, savedInstanceState)
-////
-////        val object_ma_pay: Payment = Payment(activity!!,cacheDir = activity!!.cacheDir)
-////        // val object_des: Description = Description(activity!!,cacheDir = activity!!.cacheDir)
-////        /*----------------------get_all_income------------------------------------*/
-////        object_ma_pay.get_all(object : VolleyCallback {
-////            override fun onSuccess(result: JSONObject) {
-////
-////            }
-////
-////            override fun onSuccess(result: String) {
-////                var json = JSONArray(result)
-////                var data_report = get_data_table("",0.00)
-////                val data_table = data_report.mapingData(json)
-////                //test_incomedata.text = data_income[0].Code
-////                table_recycle_view_pay.layoutManager = LinearLayoutManager(requireActivity())
-////                table_recycle_view_pay.adapter = table_Adapter(data_table)
-////                //val inc_code = JSONArray(result).getJSONObject(0).getString("inc_code")
-////            }
-////        })
-////
-////    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val object_ma_pay: Payment = Payment(activity!!,cacheDir = activity!!.cacheDir)
+
+        /*----------------------get_all_income------------------------------------*/
+        object_ma_pay.get_all(object : VolleyCallback {
+            override fun onSuccess(result: JSONObject) {
+
+            }
+
+            override fun onSuccess(result: String) {
+                var json = JSONArray(result)
+                var data_report = get_data_table_py("",0.00)
+                val data_table = data_report.mapingData(json)
+
+                table_recycle_view_pay.layoutManager = LinearLayoutManager(requireActivity())
+                table_recycle_view_pay.adapter = table_Adapter_py(data_table)
+                //val inc_code = JSONArray(result).getJSONObject(0).getString("inc_code")
+            }
+        })
+
+    }
 
 
 }

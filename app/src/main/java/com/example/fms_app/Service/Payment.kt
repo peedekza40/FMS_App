@@ -24,7 +24,7 @@ class Payment(
     }
 
     fun get_all(callback: VolleyCallback){
-        url += "/get_all_payment"
+        url += "/payment_service/get_all_payment"
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
             Request.Method.GET, url,
