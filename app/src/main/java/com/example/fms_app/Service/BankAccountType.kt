@@ -7,12 +7,11 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import java.io.File
 
-class Bank(
-    val context: Context,
-    val cacheDir: File): Conifg_service(context, cacheDir) {
+class BankAccountType(val context: Context,
+                      val cacheDir: File) : Conifg_service(context, cacheDir){
 
-    fun get_bank(callback: VolleyCallback){
-        url += "/Bank_service/get_bank"
+    fun get_bankaccountType(callback: VolleyCallback){
+        url += "/Bank_service/get_bacType"
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
             Request.Method.GET, url,
@@ -27,5 +26,4 @@ class Bank(
         // Add the request to the RequestQueue.
         requestQueue?.add(stringRequest)
     }
-
 }

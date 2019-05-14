@@ -1,5 +1,7 @@
 package com.example.fms_app.Manage_base_data
 
+import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,6 +14,10 @@ class BankAccountListAdapter(val datasource: ArrayList<BankAccount_data>): Recyc
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): BacViewHolder {
         val mView = LayoutInflater.from(p0.context)
         val mViewHolder = BacViewHolder(mView, p0)
+//        mView.inflate(p1,p0).setOnClickListener {
+//            var intent = Intent(p0.context,Edit_bankaccount::class.java)
+//            startActivity(p0.context, intent, null)
+//        }
         return mViewHolder
     }
 

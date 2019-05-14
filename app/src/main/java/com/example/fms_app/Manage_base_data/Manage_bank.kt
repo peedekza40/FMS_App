@@ -66,7 +66,7 @@ class Manage_bank : Fragment() {
 
             override fun onSuccess(result: String) {
                 val bank_frm_svc = JSONArray(result)
-                var data_bank = Bank_data("", "")
+                var data_bank = Bank_data(0,"", "")
                 val bank_data = data_bank.mappingData(bank_frm_svc)
 //                val bank = ArrayList<Bank>()
                 bank_recycler.layoutManager = LinearLayoutManager(requireActivity())
