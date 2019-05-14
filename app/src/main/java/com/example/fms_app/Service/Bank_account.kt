@@ -14,7 +14,7 @@ class Bank_account (
 
     val TAG = "Service Bac"
     fun get_bankAccount(callback: VolleyCallback){
-        url += "/get_bankAccount"
+        url += "Bankaccount_service/get_bankAccount"
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
             Request.Method.GET, url,

@@ -44,21 +44,6 @@ class Manage_bank : Fragment() {
         val requestQueue = Volley.newRequestQueue(requireActivity())
         //val url = "http://www.mocky.io/v2/5cd9a43b3000006f35c01762"
         val serviceBank = Bank(activity!!.applicationContext,activity!!.cacheDir)
-//        val stringRequest = serviceDataUTF8Encoding(Request.Method.GET,url,
-//            Response.Listener<String> { response ->
-//                try{
-//                    var json = JSONArray(response)
-//                    var data_bank = Bank_data("","")
-//                    val bank_data = data_bank.mappingData(json)
-//                    bank_recycler.layoutManager = LinearLayoutManager(requireActivity())
-//                    bank_recycler.adapter = BankListAdapter(bank_data)
-//                }catch (err : JSONException){
-//
-//                }
-//            }
-//            ,Response.ErrorListener { Toast.makeText(activity,"error", Toast.LENGTH_SHORT).show() })
-//        stringRequest.tag = TAG
-//        requestQueue?.add(stringRequest)
         serviceBank.get_bank(object : VolleyCallback {
             override fun onSuccess(result: JSONObject) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
