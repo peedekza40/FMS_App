@@ -95,9 +95,21 @@ class Payment(
         requestQueue?.add(stringRequest)
     }
 
-    fun getByRangeDate(callback: VolleyCallback){
-        url += "/get_by_pay_bac_id_and_date"
-        val jsonBody = JSONObject()
+    fun getByRangeDate(date_start:String?,date_end: String?,bacId: String?,callback: VolleyCallback){
+        url += "/Payment_service/get_by_rangedate_and_bac?startDate=${date_start}&endDate=${date_end}&bacId=${bacId}"
+        val stringRequest = StringRequest(
+            Request.Method.GET, url,
+            Response.Listener<String> { response ->
+                //val accounting = JSONArray(response)
+                callback.onSuccess(response)
+            },
+            Response.ErrorListener {
+                    response-> Log.d("Service error",response.toString())
+            }
+        )
+        stringRequest.tag = TAG
+        // Add the request to the RequestQueue.
+        requestQueue?.add(stringRequest)
 
     }
 

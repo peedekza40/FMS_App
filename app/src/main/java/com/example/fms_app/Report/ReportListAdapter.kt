@@ -1,12 +1,17 @@
 package com.example.fms_app.Report
 
+import android.os.Build
+import android.support.annotation.RequiresApi
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.fms_app.Data_class.Report_data
 import com.example.fms_app.R
+import com.example.fms_app.Service.TransformDate
 import kotlinx.android.synthetic.main.report_list_view.view.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class ReportListAdapter(val datasource: ArrayList<Report_data>) : RecyclerView.Adapter<reportViewHolder>(){
 
@@ -42,10 +47,12 @@ class reportViewHolder(inflater: LayoutInflater, parent: ViewGroup)
         balance_report = itemView.report_Balance
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun binding(reportData: Report_data){
+        var formattor = DateTimeFormatter.ofPattern("dd-MM-yyyy")
         code_report?.text = reportData.Code
         detail_report?.text = reportData.Detail
-        date_report?.text = reportData.Date
+        date_report?.text = TransformDate(LocalDate.parse(reportData.Date).format(formattor)).getThaiDate_1()
         balance_report?.text = reportData.Balance
     }
 

@@ -29,7 +29,7 @@ class table_Adapter_inc (val datasource: ArrayList<get_data_table_inc>) : Recycl
 }
 
 class ViewHolder(inflater: LayoutInflater, parent: ViewGroup)
-    : RecyclerView.ViewHolder(inflater.inflate(R.layout.table_list, parent, true)){
+    : RecyclerView.ViewHolder(inflater.inflate(R.layout.table_list, parent, false)){
     var detail_table: TextView? = null
 
     var deatail_amount: TextView? = null
