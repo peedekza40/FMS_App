@@ -10,6 +10,8 @@ import android.widget.EditText
 import kotlinx.android.synthetic.main.fragment_add_income.*
 import java.util.*
 import android.app.DatePickerDialog
+import android.content.Intent
+import android.content.Intent.getIntent
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.text.Editable
@@ -137,7 +139,6 @@ class add_income : Fragment(){
             bacText.showDropDown()
         }
 
-        var obj: BankAccount? = null
         bacText.setOnItemClickListener(OnItemClickListener { arg0, arg1, arg2, arg3->
             val result = arg0.getItemAtPosition(arg2) as BankAccount
             bacId.setText(result.bacId.toString())//TextView in layout is visible = gone
@@ -205,7 +206,20 @@ class add_income : Fragment(){
                 jsonBody.put("inc_detail", "")
                 jsonBody.put("inc_desc_id", descId.text.toString().toInt())
                 jsonBody.put("inc_bac_id", bacId.text.toString().toInt())
-                service_income.insert(jsonBody)
+                service_income.insert(jsonBody, object : VolleyCallback{
+                    override fun onSuccess(result: JSONObject) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+
+                    override fun onSuccess(result: String) {
+                        val status = JSONObject(result).getBoolean("status")
+                        if(status){
+                            Toast.makeText(activity, "เพิ่มรายการบัญชีสำเร็จ", Toast.LENGTH_LONG).show()
+                            activity!!.finish()
+                        }
+                    }
+
+                })
             }else{
                 Toast.makeText(activity, "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show()
             }

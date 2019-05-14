@@ -67,14 +67,14 @@ class Income(
         requestQueue?.add(stringRequest)
     }
 
-    fun insert(jsonBody: JSONObject){
+    fun insert(jsonBody: JSONObject, callback: VolleyCallback){
         url = ip
         url += "/Income_service/insert_income"
         // Request a string response from the provided URL.
         val stringRequest = object : StringRequest(
             Request.Method.POST, url,
             Response.Listener<String> {response ->
-                Toast.makeText(context, "${response}", Toast.LENGTH_SHORT).show()
+                callback.onSuccess(response)
             },
             Response.ErrorListener {
                     response-> Toast.makeText(context, "${response}", Toast.LENGTH_SHORT).show()
