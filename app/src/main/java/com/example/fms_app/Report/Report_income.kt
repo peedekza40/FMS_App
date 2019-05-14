@@ -1,7 +1,9 @@
 package com.example.fms_app.Report
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -16,8 +18,12 @@ import kotlinx.android.synthetic.main.fragment_report_income.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 
 class Report_income: Fragment(){
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,11 +34,21 @@ class Report_income: Fragment(){
         return view
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val service_income = Income(activity!!.applicationContext,activity!!.cacheDir)
-        service_income.get_all(object : VolleyCallback {
+        val nowDate = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val nowDateFormatted = nowDate.format(formatter)
+
+        var startDate: String = nowDateFormatted
+        var endDate: String = nowDate.minusMonths(5).format(formatter)
+        var bac_Id: String? = null
+
+        val service_income = Income(activity!!.applicationContext, activity!!.cacheDir)
+        service_income.get_all_rangedate_bacid(startDate,endDate,bac_Id,object :
+            VolleyCallback {
             override fun onSuccess(result: JSONObject) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
@@ -40,12 +56,12 @@ class Report_income: Fragment(){
             override fun onSuccess(result: String) {
                 try {
                     var json = JSONArray(result)
-                    var data_report = Report_data("", "", "", "")
-                    val data_income = data_report.mapingData(json)
+                    var data_report = Report_data("","","","")
+                    val data_income = data_report.mapingData_income(json)
                     Income_recycler.layoutManager = LinearLayoutManager(requireActivity())
                     Income_recycler.adapter = ReportListAdapter(data_income)
                 }catch (e: JSONException){
-                    test_incomedata.text = e.message
+                    test_incomedata.text = "Data not found or Service connection error"
                 }
             }
         })
@@ -58,12 +74,12 @@ class Report_income: Fragment(){
                 val positionView = (Income_recycler.getLayoutManager() as LinearLayoutManager).findFirstVisibleItemPosition()
 
                 if (positionView > 0) {
-                    if(!Search_income_FAV.isShown) {
-                        Search_income_FAV.show();
+                    if(Search_income_FAV.isShown) {
+                        Search_income_FAV.hide()
                     }
                 } else  {
-                    if(Search_income_FAV.isShown) {
-                        Search_income_FAV.hide();
+                    if(!Search_income_FAV.isShown) {
+                        Search_income_FAV.show()
                     }
                 }
             }
@@ -71,7 +87,8 @@ class Report_income: Fragment(){
         })
 
         Search_income_FAV.setOnClickListener {
-            var intent: Intent = Intent(activity!!.applicationContext, Report_Filter::class.java)
+            var intent: Intent =
+                Intent(activity!!.applicationContext, Report_Filter_income::class.java)
             startActivity(intent)
         }
 
