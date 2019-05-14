@@ -205,8 +205,6 @@ class add_income : Fragment(){
                 jsonBody.put("inc_detail", "")
                 jsonBody.put("inc_desc_id", descId.text.toString().toInt())
                 jsonBody.put("inc_bac_id", bacId.text.toString().toInt())
-                jsonBody.put("inc_status", "Y")
-                jsonBody.put("inc_editor", 2)
                 service_income.insert(jsonBody)
             }else{
                 Toast.makeText(activity, "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show()

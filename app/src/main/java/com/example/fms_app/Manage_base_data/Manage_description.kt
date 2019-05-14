@@ -53,7 +53,7 @@ class Manage_description : Fragment() {
 
             override fun onSuccess(result: String) {
                 val desc_frm_srv = JSONArray(result)
-                var data_desc = Description_data("", "", 0)
+                var data_desc = Description_data("", "",0)
                 val desc_data = data_desc.mappingData(desc_frm_srv)
                 desc_recycler.layoutManager = LinearLayoutManager(requireActivity())
                 desc_recycler.adapter = DescriptionListAdapter(desc_data)
