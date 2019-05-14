@@ -4,7 +4,6 @@
           package="com.example.fms_app">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
@@ -15,15 +14,21 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-        <activity android:name=".Report_Filter">
+        <activity android:name=".Edit_description">
         </activity>
-        <!--
-        <activity
-                android:name=".TabbedTest"
-                android:label="@string/title_activity_tabbed_test"
-                android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".Add_description">
         </activity>
-        -->
+        <activity android:name=".Edit_bank">
+        </activity>
+        <activity android:name=".Add_bank">
+        </activity>
+        <activity android:name=".Edit_bankaccount">
+        </activity>
+        <activity android:name=".Add_bankAccount">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".Add_accounting">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"

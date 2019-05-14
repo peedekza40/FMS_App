@@ -13,6 +13,9 @@ import java.io.File
 import kotlin.collections.ArrayList
 import org.json.JSONObject
 import com.example.fms_app.Service.Conifg_service
+import org.json.JSONArray
+import com.android.volley.DefaultRetryPolicy
+
 
 
 
@@ -20,10 +23,12 @@ class Income(
     val context: Context,
     val cacheDir: File): Conifg_service(context, cacheDir){
 
+    val TAG = "Service Inc"
     init {
     }
 
     fun get_all(callback: VolleyCallback){
+        url = ip
         url += "/get_all_income"
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
@@ -36,12 +41,13 @@ class Income(
                     response-> Log.d("Service error",response.toString())
             }
         )
-        stringRequest.tag = "Service FMS"
+        stringRequest.tag = TAG
         // Add the request to the RequestQueue.
         requestQueue?.add(stringRequest)
     }
 
     fun get_last_inc_code(callback: VolleyCallback){
+        url = ip
         url += "/get_last_inc_code"
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
@@ -53,33 +59,34 @@ class Income(
                     response-> Log.d("Service error",response.toString())
             }
         )
-        stringRequest.tag = "Service FMS"
+        stringRequest.tag = TAG
         // Add the request to the RequestQueue.
         requestQueue?.add(stringRequest)
     }
 
-    fun insert(callback: VolleyCallback){
+    fun insert(jsonBody: JSONObject){
+        url = ip
         url += "/insert_income"
-        val jsonBody = JSONObject()
-        //jsonBody.put("")
         // Request a string response from the provided URL.
-        val stringRequest = StringRequest(
-            Request.Method.POST, url,
-            Response.Listener<String> { response ->
-                //val accounting = JSONArray(response)
-                callback.onSuccess(response)
+        val objectRequest = JsonObjectRequest(
+            Request.Method.POST, url,jsonBody,
+            Response.Listener<JSONObject> {response ->
             },
             Response.ErrorListener {
                     response-> Toast.makeText(context, "${response}", Toast.LENGTH_SHORT).show()
             }
         )
+        objectRequest.setRetryPolicy(
+                DefaultRetryPolicy(
+                    0,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+                )
+        )
+        requestQueue?.add(objectRequest)
     }
 
-    fun getByRangeDate(callback: VolleyCallback){
-        url += "/get_income_by_rangedate_and_bac"
-        val jsonBody = JSONObject()
-
+    fun cancleRequest(){
+        requestQueue?.cancelAll(TAG)
     }
-
-
 }

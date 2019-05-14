@@ -56,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
                         android:ems="10"
-                        android:id="@+id/receiptText" android:layout_marginBottom="5dp" android:hint="เล่มที่เสร็จ"/>
+                        android:id="@+id/receiptText" android:layout_marginBottom="5dp" android:hint="เล่มที่ใบเสร็จ"/>
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"

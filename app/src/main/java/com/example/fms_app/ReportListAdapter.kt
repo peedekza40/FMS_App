@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.report_list_view.view.*
 
-class ReportListAdapter(val datasource: ArrayList<Report_data>) : RecyclerView.Adapter<ViewHolder>(){
+class ReportListAdapter(val datasource: ArrayList<Report_data>) : RecyclerView.Adapter<reportViewHolder>(){
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): reportViewHolder {
         val mView = LayoutInflater.from(p0.context)
-        val mViewHolder = ViewHolder(mView, p0)
+        val mViewHolder = reportViewHolder(mView, p0)
 
         return mViewHolder
     }
@@ -21,14 +21,14 @@ class ReportListAdapter(val datasource: ArrayList<Report_data>) : RecyclerView.A
         return datasource.size
     }
 
-    override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
+    override fun onBindViewHolder(p0: reportViewHolder, p1: Int) {
         val reportData: Report_data = datasource[p1]
         p0.binding(reportData)
     }
 
 }
 
-class ViewHolder(inflater: LayoutInflater, parent: ViewGroup)
+class reportViewHolder(inflater: LayoutInflater, parent: ViewGroup)
     : RecyclerView.ViewHolder(inflater.inflate(R.layout.report_list_view, parent, false)){
     var code_report: TextView? = null
     var detail_report: TextView? = null
