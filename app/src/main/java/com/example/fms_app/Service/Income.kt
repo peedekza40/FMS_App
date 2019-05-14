@@ -29,7 +29,7 @@ class Income(
 
     fun get_all(callback: VolleyCallback){
         url = ip
-        url += "/get_all_income"
+        url += "/Income_service/get_all_income"
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
             Request.Method.GET, url,
@@ -48,7 +48,7 @@ class Income(
 
     fun get_last_inc_code(callback: VolleyCallback){
         url = ip
-        url += "/get_last_inc_code"
+        url += "/Income_service/get_last_inc_code"
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
             Request.Method.GET, url,
@@ -66,22 +66,16 @@ class Income(
 
     fun insert(jsonBody: JSONObject){
         url = ip
-        url += "/insert_income"
+        url += "/Income_service/insert_income"
         // Request a string response from the provided URL.
         val objectRequest = JsonObjectRequest(
             Request.Method.POST, url,jsonBody,
             Response.Listener<JSONObject> {response ->
+                Toast.makeText(context, "${response}", Toast.LENGTH_SHORT).show()
             },
             Response.ErrorListener {
                     response-> Toast.makeText(context, "${response}", Toast.LENGTH_SHORT).show()
             }
-        )
-        objectRequest.setRetryPolicy(
-                DefaultRetryPolicy(
-                    0,
-                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-                )
         )
         requestQueue?.add(objectRequest)
     }

@@ -21,7 +21,7 @@ class Description (
 
     fun get_desc_by_desctype(desctype : Int, callback: VolleyCallback){
         url = ip
-        url += "/get_desc_by_desctype/" + desctype
+        url += "/Description_service/get_desc_by_desctype?desc_type=" + desctype
 
         // Request a string response from the provided URL.
         val stringRequest = StringRequest(
