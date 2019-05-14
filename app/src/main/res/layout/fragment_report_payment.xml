@@ -7,7 +7,7 @@
              tools:context=".Report.Report_income">
     <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/test_paymentdata"/>
+            android:layout_height="wrap_content" android:id="@+id/test_paymentdata" android:visibility="invisible"/>
     <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/Payment_recycler"/>

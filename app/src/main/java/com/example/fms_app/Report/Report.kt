@@ -1,5 +1,6 @@
 package com.example.fms_app.Report
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.TabLayout
@@ -41,6 +42,10 @@ class Report : Fragment() {
         }
 
 
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val fragment = fragmentManager!!.findFragmentById(R.id.Report_viewpager)
+        fragment?.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onCreateView(
