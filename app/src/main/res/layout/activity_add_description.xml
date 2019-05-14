@@ -37,6 +37,16 @@
                         android:hint="คำอธิบายรายการบัญชี" android:id="@+id/txt_descName"
                         android:inputType="textPersonName"/>
             </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <Spinner
+                        android:id="@+id/txt_desctype"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+            </android.support.design.widget.TextInputLayout>
             <Button
                     android:text="บันทึก"
                     android:layout_width="match_parent"
