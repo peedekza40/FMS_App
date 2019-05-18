@@ -1,5 +1,6 @@
 package com.example.fms_app.Report
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.support.annotation.RequiresApi
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +36,7 @@ class Report_income: Fragment(){
         return view
     }
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,12 +45,8 @@ class Report_income: Fragment(){
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val nowDateFormatted = nowDate.format(formatter)
 
-        var startDate: String = nowDateFormatted
-        var endDate: String = nowDate.minusMonths(5).format(formatter)
-        var bac_Id: String? = null
-
         val service_income = Income(activity!!.applicationContext, activity!!.cacheDir)
-        service_income.get_all_rangedate_bacid(startDate,endDate,bac_Id,object :
+        service_income.get_all_rangedate_bacid(nowDate.minusMonths(3).format(formatter),nowDateFormatted,"",object :
             VolleyCallback {
             override fun onSuccess(result: JSONObject) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -58,7 +57,7 @@ class Report_income: Fragment(){
                     var json = JSONArray(result)
                     var data_report = Report_data("","","","")
                     val data_income = data_report.mapingData_income(json)
-                    Income_recycler.layoutManager = LinearLayoutManager(requireActivity())
+                    Income_recycler.layoutManager = LinearLayoutManager(activity)
                     Income_recycler.adapter = ReportListAdapter(data_income)
                 }catch (e: JSONException){
                     test_incomedata.text = "Data not found or Service connection error"
@@ -87,8 +86,7 @@ class Report_income: Fragment(){
         })
 
         Search_income_FAV.setOnClickListener {
-            var intent: Intent =
-                Intent(activity!!.applicationContext, Report_Filter_income::class.java)
+            var intent: Intent = Intent(activity!!.applicationContext, Report_Filter_income::class.java)
             startActivity(intent)
         }
 

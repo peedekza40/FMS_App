@@ -1,5 +1,6 @@
 package com.example.fms_app.Manage_accounting
 
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +8,7 @@ import android.widget.TextView
 import com.example.fms_app.R
 import kotlinx.android.synthetic.main.table_list.view.*
 
-class table_Adapter (val datasource: ArrayList<get_data_table>) : RecyclerView.Adapter<ViewHolder>(){
+class table_Adapter_inc (val datasource: ArrayList<get_data_table_inc>) : RecyclerView.Adapter<ViewHolder>(){
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val mView = LayoutInflater.from(p0.context)
@@ -21,7 +22,7 @@ class table_Adapter (val datasource: ArrayList<get_data_table>) : RecyclerView.A
     }
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        val reportData: get_data_table = datasource[p1]
+        val reportData: get_data_table_inc = datasource[p1]
         p0.binding(reportData)
     }
 
@@ -40,7 +41,7 @@ class ViewHolder(inflater: LayoutInflater, parent: ViewGroup)
 
     }
 
-    fun binding(get_data_table: get_data_table){
+    fun binding(get_data_table: get_data_table_inc){
         detail_table?.text = get_data_table.desc_description
 
         deatail_amount?.text = get_data_table.inc_amount.toString()

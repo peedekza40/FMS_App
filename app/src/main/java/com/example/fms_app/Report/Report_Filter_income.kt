@@ -1,11 +1,15 @@
 package com.example.fms_app.Report
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.annotation.RequiresApi
-import android.support.v4.app.Fragment
+import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import com.example.fms_app.Data_class.BankAccount
@@ -13,7 +17,7 @@ import com.example.fms_app.R
 import com.example.fms_app.Service.Bank_account
 import com.example.fms_app.Service.TransformDate
 import com.example.fms_app.Service.VolleyCallback
-import kotlinx.android.synthetic.main.activity_report_filter.*
+import kotlinx.android.synthetic.main.activity_report_filter_income.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.time.LocalDateTime
@@ -22,34 +26,27 @@ import java.util.*
 
 class Report_Filter_income : AppCompatActivity() {
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_report_filter)
+        setContentView(R.layout.activity_report_filter_income)
 
+        /*-----------------set action bar-------------------*/
+        //actionbar
+        val actionbar = supportActionBar
+        //set actionbar title
+        actionbar!!.title = "เพิ่มรายการบัญชี"
+        //set back button
+        actionbar.setDisplayHomeAsUpEnabled(true)
+
+        // set Service
         val service_bankACC = Bank_account(this, cacheDir)
-        //var report_income: Fragment = Report_income()
 
-        this.setDatePicker(input_date_start)
-        this.setDatePicker(input_date_end)
+        //call datepicker
+        this.setDatePicker(input_date_start_inc)
+        this.setDatePicker(input_date_end_inc)
 
-        button_search.setOnClickListener {
-            var date_start = input_date_start.text.toString()
-            var date_end = input_date_end.text.toString()
-            //this.bacId = spinner_account.
-
-            //var arg_income = Bundle()
-            //arg_income.putString("inc_startDate",date_start)
-            //arg_income.putString("inc_endDate",date_end)
-            //arg_income.putString("inc_startDate",date_start)
-
-            //report_income.arguments = arg_income
-            finish()
-        }
-
-        button_cancel.setOnClickListener {
-            finish()
-        }
-
+        // get data and set data to spinner
         service_bankACC.get_bankAccount(object : VolleyCallback {
             override fun onSuccess(result: JSONObject) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -70,9 +67,41 @@ class Report_Filter_income : AppCompatActivity() {
                 //Create Array Adapter
                 val adapter = ArrayAdapter<BankAccount>(this@Report_Filter_income, android.R.layout.simple_dropdown_item_1line, bac)
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                bac_list.setAdapter(adapter)
+                bac_list_inc.setAdapter(adapter)
             }
         })
+
+        // get data from spinner
+        bac_list_inc.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val result = parent!!.getItemAtPosition(position) as BankAccount
+                bac_id_spinner_inc.text = result.bacId.toString()
+            }
+
+        }
+
+        button_search_inc.setOnClickListener {
+            var date_start = input_date_start_inc.text.toString()
+            var date_end = input_date_end_inc.text.toString()
+            var bac_id = bac_id_spinner_inc.text.toString()
+            var income_intent = Intent(this@Report_Filter_income,Report_income::class.java)
+            finish()
+        }
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item!!.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -100,5 +129,24 @@ class Report_Filter_income : AppCompatActivity() {
             dpd.show()
         }
     }
+
+//    fun validate(): Boolean{
+//        //val service_bankACC = Bank_account(activity!!.applicationContext, activity!!.cacheDir)
+//        var result: Boolean = true
+//        if(TransformDate(input_date_end.text.toString()).getDateforDb_1() < TransformDate(input_date_start.text.toString()).getDateforDb_1()){
+//            bacText.setError( "กรุณาเลือกบัญชีธนาคาร" )
+//            result = false
+//        }
+//        if(amountText.text.toString() == ""){
+//            amountText.setError( "กรุณากรอกจำนวนเงิน" )
+//            result = false
+//        }
+//        if(descText.text.toString() == ""){
+//            descText.setError("กรุณาเลือกคำอธิบาย")
+//            result = false
+//        }
+//
+//        return result
+//    }
 
 }

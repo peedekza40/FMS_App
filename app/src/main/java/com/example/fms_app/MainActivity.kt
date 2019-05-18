@@ -16,6 +16,8 @@ import com.example.fms_app.Manage_accounting.Add_accounting
 import com.example.fms_app.Manage_accounting.Manage_ac
 import com.example.fms_app.Manage_base_data.Manage_base_data
 import com.example.fms_app.Report.Report
+import android.R.attr.data
+import com.example.fms_app.Report.Report_income
 
 
 @Suppress("DEPRECATION")
@@ -79,19 +81,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == RESULT_OK) {
-            when (requestCode){
-                1 ->{
-                    Toast.makeText(this, "Success!!" + requestCode, Toast.LENGTH_SHORT).show()
-                }
-                2 ->{
-                    Toast.makeText(this, "Success!!" + requestCode, Toast.LENGTH_SHORT).show()
-                }
-                3 ->{
-                    Toast.makeText(this, "Success!!" + requestCode, Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
+        val fragment = supportFragmentManager.findFragmentById(R.id.container)
+        fragment!!.onActivityResult(requestCode, resultCode, data)
     }
 
 

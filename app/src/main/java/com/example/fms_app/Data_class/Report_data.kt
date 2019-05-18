@@ -26,7 +26,7 @@ class Report_data(var Code: String,
         (0 until data.length()).mapTo(reportDataListArr) {
             Report_data(
                 data.getJSONObject(it).getString("pay_code"),
-                data.getJSONObject(it).getString("pay_desc_id"),
+                data.getJSONObject(it).getString("desc_description"),
                 data.getJSONObject(it).getString("pay_date"),
                 data.getJSONObject(it).getString("pay_amount")
             )

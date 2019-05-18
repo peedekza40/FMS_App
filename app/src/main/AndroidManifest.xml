@@ -14,6 +14,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
+        <activity android:name=".Manage_accounting.DetailAccounting">
+        </activity>
         <activity android:name=".Manage_base_data.Edit_description">
         </activity>
         <activity android:name=".Manage_base_data.Add_description">
@@ -44,8 +46,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Report.Report_Filter_income"></activity>
-        <activity android:name=".Report.Report_Filter_payment"></activity>
+        <activity android:name=".Report.Report_Filter_income"/>
+        <activity android:name=".Report.Report_Filter_payment"/>
     </application>
 
 </manifest>
