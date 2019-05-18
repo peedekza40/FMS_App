@@ -14,6 +14,12 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
+        <activity android:name=".Manage_base_data.Description_detail">
+        </activity>
+        <activity android:name=".Manage_base_data.BankAccount_detail">
+        </activity>
+        <activity android:name=".Manage_base_data.Bank_detail">
+        </activity>
         <activity android:name=".Manage_accounting.DetailAccounting">
         </activity>
         <activity android:name=".Manage_base_data.Edit_description">

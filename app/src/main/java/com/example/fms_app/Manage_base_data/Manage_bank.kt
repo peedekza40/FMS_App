@@ -64,12 +64,12 @@ class Manage_bank : Fragment() {
                         val positionView = (bank_recycler.getLayoutManager() as LinearLayoutManager).findFirstVisibleItemPosition()
 
                         if (positionView > 0) {
-                            if(!add_bank_btn.isShown) {
-                                add_bank_btn.show();
-                            }
-                        } else  {
                             if(add_bank_btn.isShown) {
                                 add_bank_btn.hide();
+                            }
+                        } else  {
+                            if(!add_bank_btn.isShown) {
+                                add_bank_btn.show();
                             }
                         }
                     }

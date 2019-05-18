@@ -60,12 +60,12 @@ class Manage_bankAccount : Fragment() {
                         val positionView = (bac_recycler.getLayoutManager() as LinearLayoutManager).findFirstVisibleItemPosition()
 
                         if (positionView > 0) {
-                            if(!add_bac_btn.isShown) {
-                                add_bac_btn.show();
-                            }
-                        } else  {
                             if(add_bac_btn.isShown) {
                                 add_bac_btn.hide();
+                            }
+                        } else  {
+                            if(!add_bac_btn.isShown) {
+                                add_bac_btn.show();
                             }
                         }
                     }

@@ -65,12 +65,12 @@ class Manage_description : Fragment() {
                         val positionView = (desc_recycler.getLayoutManager() as LinearLayoutManager).findFirstVisibleItemPosition()
 
                         if (positionView > 0) {
-                            if(!add_desc_btn.isShown) {
-                                add_desc_btn.show();
-                            }//if
-                        } else  {
                             if(add_desc_btn.isShown) {
                                 add_desc_btn.hide();
+                            }//if
+                        } else  {
+                            if(!add_desc_btn.isShown) {
+                                add_desc_btn.show();
                             }//if
                         }//else
                     }//onScrolled
